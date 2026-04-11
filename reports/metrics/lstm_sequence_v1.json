@@ -1,0 +1,164 @@
+{
+  "model": "lstm",
+  "threshold": 0.61,
+  "valid_best_f1": 0.5045045045045045,
+  "test": {
+    "n": 891,
+    "positive_rate": 0.17957350611686707,
+    "auroc": 0.713483242134063,
+    "auprc": 0.37645114011653324,
+    "f1": 0.41743119266055045,
+    "precision": 0.32971014492753625,
+    "recall": 0.56875,
+    "confusion_matrix": {
+      "tn": 546,
+      "fp": 185,
+      "fn": 69,
+      "tp": 91
+    }
+  },
+  "features": {
+    "n_features": 43,
+    "sequence_length": 24,
+    "train_n": 7194,
+    "valid_n": 878,
+    "test_n": 891
+  },
+  "training": {
+    "best_epoch": 5,
+    "best_valid_auroc": 0.7812458081824278,
+    "epochs_ran": 10,
+    "hidden_size": 64,
+    "dropout": 0.2,
+    "learning_rate": 0.001,
+    "batch_size": 128,
+    "patience": 5,
+    "feature_columns": [
+      "ALP",
+      "ALT",
+      "AST",
+      "Age",
+      "Albumin",
+      "BUN",
+      "Bilirubin",
+      "Cholesterol",
+      "Creatinine",
+      "DiasABP",
+      "FiO2",
+      "GCS",
+      "Gender",
+      "Glucose",
+      "HCO3",
+      "HCT",
+      "HR",
+      "Height",
+      "ICUType",
+      "K",
+      "Lactate",
+      "MAP",
+      "MechVent",
+      "Mg",
+      "NIDiasABP",
+      "NIMAP",
+      "NISysABP",
+      "Na",
+      "PaCO2",
+      "PaO2",
+      "Platelets",
+      "RespRate",
+      "SaO2",
+      "SysABP",
+      "Temp",
+      "TroponinI",
+      "TroponinT",
+      "Urine",
+      "WBC",
+      "Weight",
+      "pH",
+      "Urine_ml_per_kg_hr",
+      "BUN_Creatinine_ratio"
+    ],
+    "history": [
+      {
+        "epoch": 1,
+        "train_loss": 1.0435127929637307,
+        "valid_auroc": 0.7107478202548625,
+        "valid_auprc": 0.3454714358089684,
+        "valid_best_f1": 0.4326710816777042,
+        "valid_best_threshold": 0.56
+      },
+      {
+        "epoch": 2,
+        "train_loss": 0.9569260383907118,
+        "valid_auroc": 0.7562038900067071,
+        "valid_auprc": 0.3916383928972089,
+        "valid_best_f1": 0.48635235732009924,
+        "valid_best_threshold": 0.59
+      },
+      {
+        "epoch": 3,
+        "train_loss": 0.928811416291354,
+        "valid_auroc": 0.763137156270959,
+        "valid_auprc": 0.39813784198833657,
+        "valid_best_f1": 0.48633879781420764,
+        "valid_best_threshold": 0.63
+      },
+      {
+        "epoch": 4,
+        "train_loss": 0.8994720097173724,
+        "valid_auroc": 0.7622987927565392,
+        "valid_auprc": 0.4156439030233504,
+        "valid_best_f1": 0.493573264781491,
+        "valid_best_threshold": 0.64
+      },
+      {
+        "epoch": 5,
+        "train_loss": 0.8801499552894056,
+        "valid_auroc": 0.7812458081824278,
+        "valid_auprc": 0.445790651554623,
+        "valid_best_f1": 0.5045045045045045,
+        "valid_best_threshold": 0.61
+      },
+      {
+        "epoch": 6,
+        "train_loss": 0.8486870830519158,
+        "valid_auroc": 0.7712105969148223,
+        "valid_auprc": 0.4466384519695965,
+        "valid_best_f1": 0.48259860788863107,
+        "valid_best_threshold": 0.5700000000000001
+      },
+      {
+        "epoch": 7,
+        "train_loss": 0.8086396204797845,
+        "valid_auroc": 0.7547199865861838,
+        "valid_auprc": 0.4188901435836399,
+        "valid_best_f1": 0.46522781774580335,
+        "valid_best_threshold": 0.58
+      },
+      {
+        "epoch": 8,
+        "train_loss": 0.7805471598056325,
+        "valid_auroc": 0.7497065727699531,
+        "valid_auprc": 0.4035020403548905,
+        "valid_best_f1": 0.4581497797356828,
+        "valid_best_threshold": 0.5
+      },
+      {
+        "epoch": 9,
+        "train_loss": 0.7490286827087402,
+        "valid_auroc": 0.7484406438631791,
+        "valid_auprc": 0.406040898459702,
+        "valid_best_f1": 0.4735376044568245,
+        "valid_best_threshold": 0.67
+      },
+      {
+        "epoch": 10,
+        "train_loss": 0.7054934637588367,
+        "valid_auroc": 0.746411804158283,
+        "valid_auprc": 0.40254543988366615,
+        "valid_best_f1": 0.4743276283618582,
+        "valid_best_threshold": 0.56
+      }
+    ]
+  }
+}

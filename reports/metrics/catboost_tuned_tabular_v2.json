@@ -1,0 +1,171 @@
+{
+  "model": "catboost",
+  "threshold": 0.48,
+  "valid_best_f1": 0.5440806045340051,
+  "test": {
+    "n": 891,
+    "positive_rate": 0.17957351290684623,
+    "auroc": 0.7723153214774282,
+    "auprc": 0.44340012557913566,
+    "f1": 0.4689265536723164,
+    "precision": 0.42783505154639173,
+    "recall": 0.51875,
+    "confusion_matrix": {
+      "tn": 620,
+      "fp": 111,
+      "fn": 77,
+      "tp": 83
+    }
+  },
+  "tuning": {
+    "enabled": true,
+    "selection_metric": "valid_best_f1",
+    "best_params": {
+      "depth": 6,
+      "learning_rate": 0.05,
+      "l2_leaf_reg": 10
+    },
+    "n_trials": 12,
+    "trials": [
+      {
+        "params": {
+          "depth": 4,
+          "learning_rate": 0.03,
+          "l2_leaf_reg": 3
+        },
+        "threshold": 0.5,
+        "valid_best_f1": 0.5291479820627802,
+        "valid_auprc": 0.5163624866673535,
+        "valid_auroc": 0.8174128101945004
+      },
+      {
+        "params": {
+          "depth": 4,
+          "learning_rate": 0.03,
+          "l2_leaf_reg": 10
+        },
+        "threshold": 0.49,
+        "valid_best_f1": 0.5394736842105263,
+        "valid_auprc": 0.5371177067944357,
+        "valid_auroc": 0.8192655935613682
+      },
+      {
+        "params": {
+          "depth": 4,
+          "learning_rate": 0.05,
+          "l2_leaf_reg": 3
+        },
+        "threshold": 0.44000000000000006,
+        "valid_best_f1": 0.5341880341880342,
+        "valid_auprc": 0.5243243952287511,
+        "valid_auroc": 0.8130449362843729
+      },
+      {
+        "params": {
+          "depth": 4,
+          "learning_rate": 0.05,
+          "l2_leaf_reg": 10
+        },
+        "threshold": 0.45000000000000007,
+        "valid_best_f1": 0.5376344086021505,
+        "valid_auprc": 0.5197803246612442,
+        "valid_auroc": 0.8146126760563379
+      },
+      {
+        "params": {
+          "depth": 6,
+          "learning_rate": 0.03,
+          "l2_leaf_reg": 3
+        },
+        "threshold": 0.47,
+        "valid_best_f1": 0.5243619489559165,
+        "valid_auprc": 0.5158334795097211,
+        "valid_auroc": 0.8107897384305834
+      },
+      {
+        "params": {
+          "depth": 6,
+          "learning_rate": 0.03,
+          "l2_leaf_reg": 10
+        },
+        "threshold": 0.51,
+        "valid_best_f1": 0.543640897755611,
+        "valid_auprc": 0.518797060195168,
+        "valid_auroc": 0.8181170355466131
+      },
+      {
+        "params": {
+          "depth": 6,
+          "learning_rate": 0.05,
+          "l2_leaf_reg": 3
+        },
+        "threshold": 0.48,
+        "valid_best_f1": 0.5308310991957105,
+        "valid_auprc": 0.525453176977023,
+        "valid_auroc": 0.8148474178403755
+      },
+      {
+        "params": {
+          "depth": 6,
+          "learning_rate": 0.05,
+          "l2_leaf_reg": 10
+        },
+        "threshold": 0.48,
+        "valid_best_f1": 0.5440806045340051,
+        "valid_auprc": 0.5152125485069038,
+        "valid_auroc": 0.8091800804828975
+      },
+      {
+        "params": {
+          "depth": 8,
+          "learning_rate": 0.03,
+          "l2_leaf_reg": 3
+        },
+        "threshold": 0.36,
+        "valid_best_f1": 0.5336322869955157,
+        "valid_auprc": 0.5051626614547401,
+        "valid_auroc": 0.8076794097920857
+      },
+      {
+        "params": {
+          "depth": 8,
+          "learning_rate": 0.03,
+          "l2_leaf_reg": 10
+        },
+        "threshold": 0.49,
+        "valid_best_f1": 0.5420054200542005,
+        "valid_auprc": 0.5138243472151902,
+        "valid_auroc": 0.8120640509725016
+      },
+      {
+        "params": {
+          "depth": 8,
+          "learning_rate": 0.05,
+          "l2_leaf_reg": 3
+        },
+        "threshold": 0.4,
+        "valid_best_f1": 0.5363128491620112,
+        "valid_auprc": 0.5175225865671573,
+        "valid_auroc": 0.8088028169014084
+      },
+      {
+        "params": {
+          "depth": 8,
+          "learning_rate": 0.05,
+          "l2_leaf_reg": 10
+        },
+        "threshold": 0.29000000000000004,
+        "valid_best_f1": 0.5316455696202531,
+        "valid_auprc": 0.5174363930259708,
+        "valid_auroc": 0.8015174379611
+      }
+    ]
+  },
+  "feature_version": "v2",
+  "features": {
+    "n_features": 303,
+    "train_n": 7194,
+    "valid_n": 878,
+    "test_n": 891
+  }
+}
