@@ -1,0 +1,27 @@
+{
+  "model": "logistic",
+  "threshold": 0.5700000000000001,
+  "valid_best_f1": 0.502262443438914,
+  "test": {
+    "n": 891,
+    "positive_rate": 0.17957351290684623,
+    "auroc": 0.7415184678522573,
+    "auprc": 0.39232440190703605,
+    "f1": 0.4668304668304668,
+    "precision": 0.38461538461538464,
+    "recall": 0.59375,
+    "confusion_matrix": {
+      "tn": 579,
+      "fp": 152,
+      "fn": 65,
+      "tp": 95
+    }
+  },
+  "feature_version": "v2",
+  "features": {
+    "n_features": 303,
+    "train_n": 7194,
+    "valid_n": 878,
+    "test_n": 891
+  }
+}

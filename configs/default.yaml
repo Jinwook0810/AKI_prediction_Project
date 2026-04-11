@@ -1,0 +1,23 @@
+project:
+  name: aki-early-prediction
+  task: predict_aki_24_47h_from_0_23h
+
+data:
+  raw_csv_gz: data/released_df.csv.gz
+  raw_csv: data/released_df.csv
+  split_json: data/split_stay_id.json
+
+experiment:
+  input_hours:
+    start: 0
+    end: 23
+  target_hours:
+    start: 24
+    end: 47
+  remove_early_aki: true
+  random_seed: 42
+
+artifacts:
+  processed_dir: reports/processed
+  metrics_dir: reports/metrics
+  figures_dir: reports/figures

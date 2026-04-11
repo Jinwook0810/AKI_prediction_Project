@@ -1,0 +1,133 @@
+# Python
+__pycache__/
+*.py[cod]
+*$py.class
+*.so
+.Python
+build/
+develop-eggs/
+dist/
+downloads/
+eggs/
+.eggs/
+lib/
+lib64/
+parts/
+sdist/
+var/
+wheels/
+pip-wheel-metadata/
+share/python-wheels/
+*.egg-info/
+.installed.cfg
+*.egg
+MANIFEST
+
+# Virtual Environments
+venv/
+env/
+ENV/
+env.bak/
+venv.bak/
+
+# IDE
+.vscode/
+.idea/
+*.swp
+*.swo
+*~
+.DS_Store
+
+# Jupyter Notebook
+.ipynb_checkpoints
+*.ipynb_checkpoints
+
+# Data files (large, can be regenerated)
+*.csv
+*.gz
+*.gzip
+*.parquet
+*.feather
+
+# Artifacts and outputs (can be regenerated)
+artifacts/*
+output/*
+!artifacts/.gitkeep
+!output/.gitkeep
+
+# Model checkpoints (can be very large)
+*.pth
+*.pt
+*.h5
+*.keras
+*.joblib
+*.pkl
+*.pickle
+
+# Temporary files
+*.tmp
+*.bak
+*.log
+*.out
+.ipynb_checkpoints/
+
+# OS
+Thumbs.db
+.DS_Store
+
+# Cache
+.cache/
+*.cache
+
+# TensorBoard
+runs/
+logs/
+
+# VS Code settings (optional - uncomment if you want to share them)
+# .vscode/
+
+# macOS
+.AppleDouble
+.LSOverride
+
+# Windows
+$RECYCLE.BIN/
+ehthumbs.db
+
+# Config files with sensitive info
+config_local.py
+secrets.json
+.env
+.env.local
+
+# Large data directories (reference only)
+IMEN383_Practice_EMR_Handling_upload/
+IMEN383_Team_Project_Files/**
+!IMEN383_Team_Project_Files/
+!IMEN383_Team_Project_Files/split_stay_id.json
+
+# Reports: keep compact summaries and metrics, ignore large regenerable artifacts
+reports/processed/*
+!reports/processed/.gitkeep
+!reports/processed/cohort_summary.json
+
+reports/eda/*
+!reports/eda/eda_summary.md
+
+reports/importance/*
+!reports/importance/*.md
+
+# CatBoost
+catboost_info/
+
+# LightGBM
+.lightgbm/
+
+# Legacy reference materials
+legacy/course_materials/
+legacy/notes/
+legacy/
+notebooks/
+
+# Legacy or non-reporting metrics
+reports/metrics/dummy_tabular_v1.json

@@ -1,0 +1,27 @@
+{
+  "model": "random_forest",
+  "threshold": 0.24000000000000002,
+  "valid_best_f1": 0.528395061728395,
+  "test": {
+    "n": 891,
+    "positive_rate": 0.17957351290684623,
+    "auroc": 0.7853710670314638,
+    "auprc": 0.4477024716416861,
+    "f1": 0.4869109947643979,
+    "precision": 0.4189189189189189,
+    "recall": 0.58125,
+    "confusion_matrix": {
+      "tn": 602,
+      "fp": 129,
+      "fn": 67,
+      "tp": 93
+    }
+  },
+  "feature_version": "v2",
+  "features": {
+    "n_features": 303,
+    "train_n": 7194,
+    "valid_n": 878,
+    "test_n": 891
+  }
+}

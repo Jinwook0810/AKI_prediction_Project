@@ -1,0 +1,468 @@
+{
+  "model": "transformer",
+  "input_variant": "masked",
+  "threshold": 0.53,
+  "valid_best_f1": 0.5313807531380753,
+  "test": {
+    "n": 891,
+    "positive_rate": 0.17957350611686707,
+    "auroc": 0.7487004103967168,
+    "auprc": 0.402594695208557,
+    "f1": 0.45132743362831856,
+    "precision": 0.3493150684931507,
+    "recall": 0.6375,
+    "confusion_matrix": {
+      "tn": 541,
+      "fp": 190,
+      "fn": 58,
+      "tp": 102
+    }
+  },
+  "features": {
+    "n_features": 86,
+    "sequence_length": 24,
+    "train_n": 7194,
+    "valid_n": 878,
+    "test_n": 891,
+    "n_value_features": 43,
+    "n_mask_features": 43
+  },
+  "training": {
+    "best_epoch": 5,
+    "best_valid_auroc": 0.7934188464118039,
+    "epochs_ran": 10,
+    "d_model": 128,
+    "nhead": 8,
+    "num_layers": 3,
+    "dropout": 0.2,
+    "learning_rate": 0.001,
+    "batch_size": 128,
+    "patience": 5,
+    "use_mask": true,
+    "feature_columns": [
+      "ALP",
+      "ALT",
+      "AST",
+      "Age",
+      "Albumin",
+      "BUN",
+      "Bilirubin",
+      "Cholesterol",
+      "Creatinine",
+      "DiasABP",
+      "FiO2",
+      "GCS",
+      "Gender",
+      "Glucose",
+      "HCO3",
+      "HCT",
+      "HR",
+      "Height",
+      "ICUType",
+      "K",
+      "Lactate",
+      "MAP",
+      "MechVent",
+      "Mg",
+      "NIDiasABP",
+      "NIMAP",
+      "NISysABP",
+      "Na",
+      "PaCO2",
+      "PaO2",
+      "Platelets",
+      "RespRate",
+      "SaO2",
+      "SysABP",
+      "Temp",
+      "TroponinI",
+      "TroponinT",
+      "Urine",
+      "WBC",
+      "Weight",
+      "pH",
+      "Urine_ml_per_kg_hr",
+      "BUN_Creatinine_ratio"
+    ],
+    "mask_feature_columns": [
+      "ALP_observed",
+      "ALT_observed",
+      "AST_observed",
+      "Age_observed",
+      "Albumin_observed",
+      "BUN_observed",
+      "Bilirubin_observed",
+      "Cholesterol_observed",
+      "Creatinine_observed",
+      "DiasABP_observed",
+      "FiO2_observed",
+      "GCS_observed",
+      "Gender_observed",
+      "Glucose_observed",
+      "HCO3_observed",
+      "HCT_observed",
+      "HR_observed",
+      "Height_observed",
+      "ICUType_observed",
+      "K_observed",
+      "Lactate_observed",
+      "MAP_observed",
+      "MechVent_observed",
+      "Mg_observed",
+      "NIDiasABP_observed",
+      "NIMAP_observed",
+      "NISysABP_observed",
+      "Na_observed",
+      "PaCO2_observed",
+      "PaO2_observed",
+      "Platelets_observed",
+      "RespRate_observed",
+      "SaO2_observed",
+      "SysABP_observed",
+      "Temp_observed",
+      "TroponinI_observed",
+      "TroponinT_observed",
+      "Urine_observed",
+      "WBC_observed",
+      "Weight_observed",
+      "pH_observed",
+      "Urine_ml_per_kg_hr_observed",
+      "BUN_Creatinine_ratio_observed"
+    ],
+    "history": [
+      {
+        "epoch": 1,
+        "train_loss": 1.0492437481880188,
+        "valid_auroc": 0.7185949027498323,
+        "valid_auprc": 0.37615541260909774,
+        "valid_best_f1": 0.43636363636363634,
+        "valid_best_threshold": 0.59
+      },
+      {
+        "epoch": 2,
+        "train_loss": 0.9760662547329015,
+        "valid_auroc": 0.7441901408450704,
+        "valid_auprc": 0.3674333512872046,
+        "valid_best_f1": 0.46833013435700577,
+        "valid_best_threshold": 0.51
+      },
+      {
+        "epoch": 3,
+        "train_loss": 0.9561974416699326,
+        "valid_auroc": 0.755575117370892,
+        "valid_auprc": 0.4047020392244569,
+        "valid_best_f1": 0.48444444444444446,
+        "valid_best_threshold": 0.62
+      },
+      {
+        "epoch": 4,
+        "train_loss": 0.9301461661071108,
+        "valid_auroc": 0.7636653252850436,
+        "valid_auprc": 0.4307330271524828,
+        "valid_best_f1": 0.48123620309050774,
+        "valid_best_threshold": 0.63
+      },
+      {
+        "epoch": 5,
+        "train_loss": 0.9099746586983664,
+        "valid_auroc": 0.7934188464118039,
+        "valid_auprc": 0.47356789037491853,
+        "valid_best_f1": 0.5313807531380753,
+        "valid_best_threshold": 0.53
+      },
+      {
+        "epoch": 6,
+        "train_loss": 0.872749250186117,
+        "valid_auroc": 0.7699027498323274,
+        "valid_auprc": 0.45745902105757874,
+        "valid_best_f1": 0.49583333333333335,
+        "valid_best_threshold": 0.5700000000000001
+      },
+      {
+        "epoch": 7,
+        "train_loss": 0.879573759279753,
+        "valid_auroc": 0.7794684775318579,
+        "valid_auprc": 0.4462212547273322,
+        "valid_best_f1": 0.5209302325581395,
+        "valid_best_threshold": 0.65
+      },
+      {
+        "epoch": 8,
+        "train_loss": 0.8491503418537608,
+        "valid_auroc": 0.7918846411804158,
+        "valid_auprc": 0.4642827634884467,
+        "valid_best_f1": 0.5242718446601942,
+        "valid_best_threshold": 0.59
+      },
+      {
+        "epoch": 9,
+        "train_loss": 0.794713764859919,
+        "valid_auroc": 0.773608316566063,
+        "valid_auprc": 0.4656123729664703,
+        "valid_best_f1": 0.5164319248826291,
+        "valid_best_threshold": 0.63
+      },
+      {
+        "epoch": 10,
+        "train_loss": 0.7631728471371165,
+        "valid_auroc": 0.7895791415157613,
+        "valid_auprc": 0.4939347515447957,
+        "valid_best_f1": 0.5223880597014925,
+        "valid_best_threshold": 0.6799999999999999
+      }
+    ]
+  },
+  "tuning": {
+    "enabled": true,
+    "n_trials": 16,
+    "best_params": {
+      "d_model": 128,
+      "nhead": 8,
+      "dropout": 0.2,
+      "learning_rate": 0.001,
+      "num_layers": 3
+    },
+    "trials": [
+      {
+        "params": {
+          "d_model": 64,
+          "nhead": 4,
+          "dropout": 0.2,
+          "learning_rate": 0.001,
+          "num_layers": 2
+        },
+        "valid_best_f1": 0.4952015355086372,
+        "best_valid_auroc": 0.77761569416499,
+        "best_epoch": 5,
+        "test_auroc": 0.7504445964432284,
+        "test_auprc": 0.4112872757637235,
+        "test_f1": 0.44536082474226807
+      },
+      {
+        "params": {
+          "d_model": 64,
+          "nhead": 4,
+          "dropout": 0.2,
+          "learning_rate": 0.001,
+          "num_layers": 3
+        },
+        "valid_best_f1": 0.517814726840855,
+        "best_valid_auroc": 0.7865023474178404,
+        "best_epoch": 10,
+        "test_auroc": 0.7433054035567717,
+        "test_auprc": 0.3811600462210545,
+        "test_f1": 0.4307692307692308
+      },
+      {
+        "params": {
+          "d_model": 64,
+          "nhead": 4,
+          "dropout": 0.2,
+          "learning_rate": 0.0005,
+          "num_layers": 2
+        },
+        "valid_best_f1": 0.5219399538106235,
+        "best_valid_auroc": 0.7731136820925553,
+        "best_epoch": 7,
+        "test_auroc": 0.740235978112175,
+        "test_auprc": 0.3850621358160132,
+        "test_f1": 0.4607594936708861
+      },
+      {
+        "params": {
+          "d_model": 64,
+          "nhead": 4,
+          "dropout": 0.2,
+          "learning_rate": 0.0005,
+          "num_layers": 3
+        },
+        "valid_best_f1": 0.5176470588235295,
+        "best_valid_auroc": 0.7860496311200535,
+        "best_epoch": 10,
+        "test_auroc": 0.7435277017783858,
+        "test_auprc": 0.3764990963835684,
+        "test_f1": 0.4490861618798956
+      },
+      {
+        "params": {
+          "d_model": 64,
+          "nhead": 4,
+          "dropout": 0.3,
+          "learning_rate": 0.001,
+          "num_layers": 2
+        },
+        "valid_best_f1": 0.495,
+        "best_valid_auroc": 0.779049295774648,
+        "best_epoch": 5,
+        "test_auroc": 0.7464432284541722,
+        "test_auprc": 0.40115044633384683,
+        "test_f1": 0.45325779036827196
+      },
+      {
+        "params": {
+          "d_model": 64,
+          "nhead": 4,
+          "dropout": 0.3,
+          "learning_rate": 0.001,
+          "num_layers": 3
+        },
+        "valid_best_f1": 0.5033112582781457,
+        "best_valid_auroc": 0.7815224681421865,
+        "best_epoch": 6,
+        "test_auroc": 0.7515047879616963,
+        "test_auprc": 0.38957808215322154,
+        "test_f1": 0.45346062052505964
+      },
+      {
+        "params": {
+          "d_model": 64,
+          "nhead": 4,
+          "dropout": 0.3,
+          "learning_rate": 0.0005,
+          "num_layers": 2
+        },
+        "valid_best_f1": 0.5108433734939759,
+        "best_valid_auroc": 0.7747568745808182,
+        "best_epoch": 7,
+        "test_auroc": 0.7410824213406292,
+        "test_auprc": 0.38493497807207117,
+        "test_f1": 0.4533333333333333
+      },
+      {
+        "params": {
+          "d_model": 64,
+          "nhead": 4,
+          "dropout": 0.3,
+          "learning_rate": 0.0005,
+          "num_layers": 3
+        },
+        "valid_best_f1": 0.5067264573991032,
+        "best_valid_auroc": 0.7781438631790745,
+        "best_epoch": 10,
+        "test_auroc": 0.7443313953488372,
+        "test_auprc": 0.38443647892642446,
+        "test_f1": 0.45965770171149145
+      },
+      {
+        "params": {
+          "d_model": 128,
+          "nhead": 8,
+          "dropout": 0.2,
+          "learning_rate": 0.001,
+          "num_layers": 2
+        },
+        "valid_best_f1": 0.5179856115107914,
+        "best_valid_auroc": 0.7799547283702214,
+        "best_epoch": 8,
+        "test_auroc": 0.7488030095759233,
+        "test_auprc": 0.39000502967695216,
+        "test_f1": 0.4607329842931937
+      },
+      {
+        "params": {
+          "d_model": 128,
+          "nhead": 8,
+          "dropout": 0.2,
+          "learning_rate": 0.001,
+          "num_layers": 3
+        },
+        "valid_best_f1": 0.5313807531380753,
+        "best_valid_auroc": 0.7934188464118039,
+        "best_epoch": 5,
+        "test_auroc": 0.7487004103967168,
+        "test_auprc": 0.402594695208557,
+        "test_f1": 0.45132743362831856
+      },
+      {
+        "params": {
+          "d_model": 128,
+          "nhead": 8,
+          "dropout": 0.2,
+          "learning_rate": 0.0005,
+          "num_layers": 2
+        },
+        "valid_best_f1": 0.494949494949495,
+        "best_valid_auroc": 0.7814973172367539,
+        "best_epoch": 7,
+        "test_auroc": 0.7384148426812587,
+        "test_auprc": 0.4022926575862959,
+        "test_f1": 0.44565217391304346
+      },
+      {
+        "params": {
+          "d_model": 128,
+          "nhead": 8,
+          "dropout": 0.2,
+          "learning_rate": 0.0005,
+          "num_layers": 3
+        },
+        "valid_best_f1": 0.5162907268170426,
+        "best_valid_auroc": 0.7980717639168343,
+        "best_epoch": 5,
+        "test_auroc": 0.7441005471956225,
+        "test_auprc": 0.39875311397280966,
+        "test_f1": 0.4585635359116022
+      },
+      {
+        "params": {
+          "d_model": 128,
+          "nhead": 8,
+          "dropout": 0.3,
+          "learning_rate": 0.001,
+          "num_layers": 2
+        },
+        "valid_best_f1": 0.5190156599552572,
+        "best_valid_auroc": 0.7845321931589536,
+        "best_epoch": 8,
+        "test_auroc": 0.7507694938440493,
+        "test_auprc": 0.398913591234044,
+        "test_f1": 0.44987775061124696
+      },
+      {
+        "params": {
+          "d_model": 128,
+          "nhead": 8,
+          "dropout": 0.3,
+          "learning_rate": 0.001,
+          "num_layers": 3
+        },
+        "valid_best_f1": 0.5208747514910537,
+        "best_valid_auroc": 0.7890258215962441,
+        "best_epoch": 5,
+        "test_auroc": 0.7428693570451437,
+        "test_auprc": 0.3985960336822318,
+        "test_f1": 0.4282744282744283
+      },
+      {
+        "params": {
+          "d_model": 128,
+          "nhead": 8,
+          "dropout": 0.3,
+          "learning_rate": 0.0005,
+          "num_layers": 2
+        },
+        "valid_best_f1": 0.5025125628140703,
+        "best_valid_auroc": 0.7858148893360161,
+        "best_epoch": 7,
+        "test_auroc": 0.7423734610123119,
+        "test_auprc": 0.4007088374395251,
+        "test_f1": 0.45054945054945056
+      },
+      {
+        "params": {
+          "d_model": 128,
+          "nhead": 8,
+          "dropout": 0.3,
+          "learning_rate": 0.0005,
+          "num_layers": 3
+        },
+        "valid_best_f1": 0.5221238938053098,
+        "best_valid_auroc": 0.7994131455399061,
+        "best_epoch": 5,
+        "test_auroc": 0.742766757865937,
+        "test_auprc": 0.4038200300722272,
+        "test_f1": 0.4563106796116505
+      }
+    ]
+  }
+}

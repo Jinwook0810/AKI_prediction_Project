@@ -1,0 +1,194 @@
+{
+  "split_source": "split_stay_id.json",
+  "rules": {
+    "input_hours": [
+      0,
+      23
+    ],
+    "target_hours": [
+      24,
+      47
+    ],
+    "remove_early_aki": true
+  },
+  "raw_cleaning": {
+    "urine_cleaning": {
+      "total_urine_rows": 397332,
+      "rows_after_cleaning": 392490,
+      "exact_duplicate_groups": 4754,
+      "exact_duplicate_rows": 9596,
+      "identical_duplicate_groups": 0,
+      "conflicting_duplicate_groups": 4754
+    },
+    "value_cleaning": {
+      "total_values_set_to_nan": 4503,
+      "by_variable": {
+        "Age": {
+          "lower": 0,
+          "upper": 120,
+          "values_set_to_nan": 0
+        },
+        "Height": {
+          "lower": 50,
+          "upper": 250,
+          "values_set_to_nan": 27
+        },
+        "Weight": {
+          "lower": 20,
+          "upper": 350,
+          "values_set_to_nan": 230
+        },
+        "HR": {
+          "lower": 20,
+          "upper": 250,
+          "values_set_to_nan": 30
+        },
+        "SysABP": {
+          "lower": 30,
+          "upper": 300,
+          "values_set_to_nan": 1187
+        },
+        "DiasABP": {
+          "lower": 20,
+          "upper": 200,
+          "values_set_to_nan": 1201
+        },
+        "MAP": {
+          "lower": 20,
+          "upper": 250,
+          "values_set_to_nan": 404
+        },
+        "NISysABP": {
+          "lower": 30,
+          "upper": 300,
+          "values_set_to_nan": 465
+        },
+        "NIDiasABP": {
+          "lower": 20,
+          "upper": 200,
+          "values_set_to_nan": 519
+        },
+        "NIMAP": {
+          "lower": 20,
+          "upper": 250,
+          "values_set_to_nan": 74
+        },
+        "RespRate": {
+          "lower": 1,
+          "upper": 80,
+          "values_set_to_nan": 124
+        },
+        "SaO2": {
+          "lower": 50,
+          "upper": 100,
+          "values_set_to_nan": 15
+        },
+        "Temp": {
+          "lower": 25,
+          "upper": 45,
+          "values_set_to_nan": 165
+        },
+        "GCS": {
+          "lower": 3,
+          "upper": 15,
+          "values_set_to_nan": 0
+        },
+        "pH": {
+          "lower": 6.5,
+          "upper": 8.0,
+          "values_set_to_nan": 18
+        },
+        "Na": {
+          "lower": 80,
+          "upper": 200,
+          "values_set_to_nan": 0
+        },
+        "K": {
+          "lower": 1,
+          "upper": 10,
+          "values_set_to_nan": 6
+        },
+        "Mg": {
+          "lower": 0,
+          "upper": 15,
+          "values_set_to_nan": 6
+        },
+        "HCO3": {
+          "lower": 0,
+          "upper": 80,
+          "values_set_to_nan": 0
+        },
+        "HCT": {
+          "lower": 0,
+          "upper": 80,
+          "values_set_to_nan": 0
+        },
+        "Glucose": {
+          "lower": 0,
+          "upper": 1000,
+          "values_set_to_nan": 10
+        },
+        "BUN": {
+          "lower": 0,
+          "upper": 250,
+          "values_set_to_nan": 0
+        },
+        "Creatinine": {
+          "lower": 0,
+          "upper": 30,
+          "values_set_to_nan": 0
+        },
+        "PaCO2": {
+          "lower": 0,
+          "upper": 200,
+          "values_set_to_nan": 0
+        },
+        "PaO2": {
+          "lower": 0,
+          "upper": 700,
+          "values_set_to_nan": 0
+        },
+        "Platelets": {
+          "lower": 0,
+          "upper": 1500,
+          "values_set_to_nan": 2
+        },
+        "WBC": {
+          "lower": 0,
+          "upper": 300,
+          "values_set_to_nan": 8
+        },
+        "Urine": {
+          "lower": 0,
+          "upper": 5000,
+          "values_set_to_nan": 12
+        }
+      }
+    }
+  },
+  "counts": {
+    "filtered_rows": 428170,
+    "filtered_stays": 8963,
+    "removed_early_aki_stays": 2551
+  },
+  "splits": {
+    "train": {
+      "rows": 343684,
+      "stays": 7194,
+      "aki_positive_stays": 1376,
+      "aki_negative_stays": 5818
+    },
+    "valid": {
+      "rows": 41891,
+      "stays": 878,
+      "aki_positive_stays": 168,
+      "aki_negative_stays": 710
+    },
+    "test": {
+      "rows": 42595,
+      "stays": 891,
+      "aki_positive_stays": 160,
+      "aki_negative_stays": 731
+    }
+  }
+}

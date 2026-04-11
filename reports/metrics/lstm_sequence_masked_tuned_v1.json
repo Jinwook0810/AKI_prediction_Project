@@ -1,0 +1,458 @@
+{
+  "model": "lstm",
+  "input_variant": "masked",
+  "threshold": 0.61,
+  "valid_best_f1": 0.5239294710327456,
+  "test": {
+    "n": 891,
+    "positive_rate": 0.17957350611686707,
+    "auroc": 0.7278727770177839,
+    "auprc": 0.4410073631023064,
+    "f1": 0.44808743169398907,
+    "precision": 0.39805825242718446,
+    "recall": 0.5125,
+    "confusion_matrix": {
+      "tn": 607,
+      "fp": 124,
+      "fn": 78,
+      "tp": 82
+    }
+  },
+  "features": {
+    "n_features": 86,
+    "sequence_length": 24,
+    "train_n": 7194,
+    "valid_n": 878,
+    "test_n": 891,
+    "n_value_features": 43,
+    "n_mask_features": 43
+  },
+  "training": {
+    "best_epoch": 6,
+    "best_valid_auroc": 0.7888413816230717,
+    "epochs_ran": 11,
+    "hidden_size": 64,
+    "dropout": 0.3,
+    "learning_rate": 0.001,
+    "num_layers": 2,
+    "batch_size": 128,
+    "patience": 5,
+    "use_mask": true,
+    "feature_columns": [
+      "ALP",
+      "ALT",
+      "AST",
+      "Age",
+      "Albumin",
+      "BUN",
+      "Bilirubin",
+      "Cholesterol",
+      "Creatinine",
+      "DiasABP",
+      "FiO2",
+      "GCS",
+      "Gender",
+      "Glucose",
+      "HCO3",
+      "HCT",
+      "HR",
+      "Height",
+      "ICUType",
+      "K",
+      "Lactate",
+      "MAP",
+      "MechVent",
+      "Mg",
+      "NIDiasABP",
+      "NIMAP",
+      "NISysABP",
+      "Na",
+      "PaCO2",
+      "PaO2",
+      "Platelets",
+      "RespRate",
+      "SaO2",
+      "SysABP",
+      "Temp",
+      "TroponinI",
+      "TroponinT",
+      "Urine",
+      "WBC",
+      "Weight",
+      "pH",
+      "Urine_ml_per_kg_hr",
+      "BUN_Creatinine_ratio"
+    ],
+    "mask_feature_columns": [
+      "ALP_observed",
+      "ALT_observed",
+      "AST_observed",
+      "Age_observed",
+      "Albumin_observed",
+      "BUN_observed",
+      "Bilirubin_observed",
+      "Cholesterol_observed",
+      "Creatinine_observed",
+      "DiasABP_observed",
+      "FiO2_observed",
+      "GCS_observed",
+      "Gender_observed",
+      "Glucose_observed",
+      "HCO3_observed",
+      "HCT_observed",
+      "HR_observed",
+      "Height_observed",
+      "ICUType_observed",
+      "K_observed",
+      "Lactate_observed",
+      "MAP_observed",
+      "MechVent_observed",
+      "Mg_observed",
+      "NIDiasABP_observed",
+      "NIMAP_observed",
+      "NISysABP_observed",
+      "Na_observed",
+      "PaCO2_observed",
+      "PaO2_observed",
+      "Platelets_observed",
+      "RespRate_observed",
+      "SaO2_observed",
+      "SysABP_observed",
+      "Temp_observed",
+      "TroponinI_observed",
+      "TroponinT_observed",
+      "Urine_observed",
+      "WBC_observed",
+      "Weight_observed",
+      "pH_observed",
+      "Urine_ml_per_kg_hr_observed",
+      "BUN_Creatinine_ratio_observed"
+    ],
+    "history": [
+      {
+        "epoch": 1,
+        "train_loss": 1.047545259458977,
+        "valid_auroc": 0.7192320590207913,
+        "valid_auprc": 0.36481184098001995,
+        "valid_best_f1": 0.4409090909090909,
+        "valid_best_threshold": 0.59
+      },
+      {
+        "epoch": 2,
+        "train_loss": 0.9559637098981623,
+        "valid_auroc": 0.747677733065057,
+        "valid_auprc": 0.4016425023381735,
+        "valid_best_f1": 0.4626865671641791,
+        "valid_best_threshold": 0.59
+      },
+      {
+        "epoch": 3,
+        "train_loss": 0.9102476981648228,
+        "valid_auroc": 0.7651911468812876,
+        "valid_auprc": 0.41022607472283307,
+        "valid_best_f1": 0.4851063829787234,
+        "valid_best_threshold": 0.5
+      },
+      {
+        "epoch": 4,
+        "train_loss": 0.8935072056034155,
+        "valid_auroc": 0.7660965794768612,
+        "valid_auprc": 0.4328045645427439,
+        "valid_best_f1": 0.4878048780487805,
+        "valid_best_threshold": 0.55
+      },
+      {
+        "epoch": 5,
+        "train_loss": 0.8588931142238149,
+        "valid_auroc": 0.7716381623071764,
+        "valid_auprc": 0.4509247337012086,
+        "valid_best_f1": 0.49448123620309054,
+        "valid_best_threshold": 0.58
+      },
+      {
+        "epoch": 6,
+        "train_loss": 0.8313616901113275,
+        "valid_auroc": 0.7888413816230717,
+        "valid_auprc": 0.48411001155418154,
+        "valid_best_f1": 0.5239294710327456,
+        "valid_best_threshold": 0.61
+      },
+      {
+        "epoch": 7,
+        "train_loss": 0.7967788702563235,
+        "valid_auroc": 0.7734657947686115,
+        "valid_auprc": 0.4620457221399121,
+        "valid_best_f1": 0.5133689839572193,
+        "valid_best_threshold": 0.67
+      },
+      {
+        "epoch": 8,
+        "train_loss": 0.7699532874843531,
+        "valid_auroc": 0.7667002012072435,
+        "valid_auprc": 0.4936104809404553,
+        "valid_best_f1": 0.5033112582781457,
+        "valid_best_threshold": 0.83
+      },
+      {
+        "epoch": 9,
+        "train_loss": 0.7295845841106615,
+        "valid_auroc": 0.7675553319919516,
+        "valid_auprc": 0.4874351656801874,
+        "valid_best_f1": 0.5079365079365079,
+        "valid_best_threshold": 0.5700000000000001
+      },
+      {
+        "epoch": 10,
+        "train_loss": 0.6796744748165733,
+        "valid_auroc": 0.7667253521126761,
+        "valid_auprc": 0.45859405928835256,
+        "valid_best_f1": 0.4964871194379391,
+        "valid_best_threshold": 0.59
+      },
+      {
+        "epoch": 11,
+        "train_loss": 0.6486189992804277,
+        "valid_auroc": 0.7543511066398391,
+        "valid_auprc": 0.4832984589337984,
+        "valid_best_f1": 0.5025906735751295,
+        "valid_best_threshold": 0.63
+      }
+    ]
+  },
+  "tuning": {
+    "enabled": true,
+    "n_trials": 16,
+    "best_params": {
+      "hidden_size": 64,
+      "dropout": 0.3,
+      "learning_rate": 0.001,
+      "num_layers": 2
+    },
+    "trials": [
+      {
+        "params": {
+          "hidden_size": 64,
+          "dropout": 0.2,
+          "learning_rate": 0.001,
+          "num_layers": 1
+        },
+        "valid_best_f1": 0.4988009592326139,
+        "best_valid_auroc": 0.7701291079812207,
+        "best_epoch": 7,
+        "test_auroc": 0.749829001367989,
+        "test_auprc": 0.4440921719467867,
+        "test_f1": 0.4336734693877551
+      },
+      {
+        "params": {
+          "hidden_size": 64,
+          "dropout": 0.2,
+          "learning_rate": 0.001,
+          "num_layers": 2
+        },
+        "valid_best_f1": 0.5120481927710844,
+        "best_valid_auroc": 0.7832830315224681,
+        "best_epoch": 6,
+        "test_auroc": 0.7294459644322845,
+        "test_auprc": 0.4370837982382971,
+        "test_f1": 0.44299674267100975
+      },
+      {
+        "params": {
+          "hidden_size": 64,
+          "dropout": 0.2,
+          "learning_rate": 0.0005,
+          "num_layers": 1
+        },
+        "valid_best_f1": 0.5083135391923991,
+        "best_valid_auroc": 0.7735412474849095,
+        "best_epoch": 7,
+        "test_auroc": 0.7567031463748289,
+        "test_auprc": 0.447564746178167,
+        "test_f1": 0.4482758620689655
+      },
+      {
+        "params": {
+          "hidden_size": 64,
+          "dropout": 0.2,
+          "learning_rate": 0.0005,
+          "num_layers": 2
+        },
+        "valid_best_f1": 0.5063291139240507,
+        "best_valid_auroc": 0.7793175720992622,
+        "best_epoch": 7,
+        "test_auroc": 0.7332250341997265,
+        "test_auprc": 0.4165729582245613,
+        "test_f1": 0.4489795918367347
+      },
+      {
+        "params": {
+          "hidden_size": 64,
+          "dropout": 0.3,
+          "learning_rate": 0.001,
+          "num_layers": 1
+        },
+        "valid_best_f1": 0.5030927835051546,
+        "best_valid_auroc": 0.775083836351442,
+        "best_epoch": 7,
+        "test_auroc": 0.7495297537619698,
+        "test_auprc": 0.4498916089759854,
+        "test_f1": 0.4439746300211416
+      },
+      {
+        "params": {
+          "hidden_size": 64,
+          "dropout": 0.3,
+          "learning_rate": 0.001,
+          "num_layers": 2
+        },
+        "valid_best_f1": 0.5239294710327456,
+        "best_valid_auroc": 0.7888413816230717,
+        "best_epoch": 6,
+        "test_auroc": 0.7278727770177839,
+        "test_auprc": 0.4410073631023064,
+        "test_f1": 0.44808743169398907
+      },
+      {
+        "params": {
+          "hidden_size": 64,
+          "dropout": 0.3,
+          "learning_rate": 0.0005,
+          "num_layers": 1
+        },
+        "valid_best_f1": 0.5012165450121655,
+        "best_valid_auroc": 0.7723088531187121,
+        "best_epoch": 7,
+        "test_auroc": 0.7558310533515731,
+        "test_auprc": 0.4456127448047137,
+        "test_f1": 0.4599483204134367
+      },
+      {
+        "params": {
+          "hidden_size": 64,
+          "dropout": 0.3,
+          "learning_rate": 0.0005,
+          "num_layers": 2
+        },
+        "valid_best_f1": 0.5098039215686274,
+        "best_valid_auroc": 0.7768360160965795,
+        "best_epoch": 7,
+        "test_auroc": 0.7313525991792065,
+        "test_auprc": 0.4142479067023771,
+        "test_f1": 0.44907407407407407
+      },
+      {
+        "params": {
+          "hidden_size": 128,
+          "dropout": 0.2,
+          "learning_rate": 0.001,
+          "num_layers": 1
+        },
+        "valid_best_f1": 0.5,
+        "best_valid_auroc": 0.7782696177062373,
+        "best_epoch": 4,
+        "test_auroc": 0.7476487688098495,
+        "test_auprc": 0.45232247219198796,
+        "test_f1": 0.45524296675191817
+      },
+      {
+        "params": {
+          "hidden_size": 128,
+          "dropout": 0.2,
+          "learning_rate": 0.001,
+          "num_layers": 2
+        },
+        "valid_best_f1": 0.49122807017543857,
+        "best_valid_auroc": 0.7755449362843728,
+        "best_epoch": 6,
+        "test_auroc": 0.752094733242134,
+        "test_auprc": 0.410357657917355,
+        "test_f1": 0.4547563805104408
+      },
+      {
+        "params": {
+          "hidden_size": 128,
+          "dropout": 0.2,
+          "learning_rate": 0.0005,
+          "num_layers": 1
+        },
+        "valid_best_f1": 0.5033112582781457,
+        "best_valid_auroc": 0.790291750503018,
+        "best_epoch": 7,
+        "test_auroc": 0.7444425444596443,
+        "test_auprc": 0.4413711550733525,
+        "test_f1": 0.44651162790697674
+      },
+      {
+        "params": {
+          "hidden_size": 128,
+          "dropout": 0.2,
+          "learning_rate": 0.0005,
+          "num_layers": 2
+        },
+        "valid_best_f1": 0.48936170212765956,
+        "best_valid_auroc": 0.7789151576123408,
+        "best_epoch": 6,
+        "test_auroc": 0.7497435020519835,
+        "test_auprc": 0.41760351879544944,
+        "test_f1": 0.45454545454545453
+      },
+      {
+        "params": {
+          "hidden_size": 128,
+          "dropout": 0.3,
+          "learning_rate": 0.001,
+          "num_layers": 1
+        },
+        "valid_best_f1": 0.49295774647887325,
+        "best_valid_auroc": 0.7821428571428571,
+        "best_epoch": 8,
+        "test_auroc": 0.7473238714090287,
+        "test_auprc": 0.42197084520308686,
+        "test_f1": 0.4552058111380145
+      },
+      {
+        "params": {
+          "hidden_size": 128,
+          "dropout": 0.3,
+          "learning_rate": 0.001,
+          "num_layers": 2
+        },
+        "valid_best_f1": 0.5011933174224343,
+        "best_valid_auroc": 0.7775737759892689,
+        "best_epoch": 6,
+        "test_auroc": 0.7492561559507525,
+        "test_auprc": 0.4095539567895315,
+        "test_f1": 0.47150259067357514
+      },
+      {
+        "params": {
+          "hidden_size": 128,
+          "dropout": 0.3,
+          "learning_rate": 0.0005,
+          "num_layers": 1
+        },
+        "valid_best_f1": 0.5012048192771085,
+        "best_valid_auroc": 0.7892605633802817,
+        "best_epoch": 7,
+        "test_auroc": 0.742125512995896,
+        "test_auprc": 0.44064225143761465,
+        "test_f1": 0.4444444444444444
+      },
+      {
+        "params": {
+          "hidden_size": 128,
+          "dropout": 0.3,
+          "learning_rate": 0.0005,
+          "num_layers": 2
+        },
+        "valid_best_f1": 0.4892367906066536,
+        "best_valid_auroc": 0.7793427230046948,
+        "best_epoch": 6,
+        "test_auroc": 0.7512568399452805,
+        "test_auprc": 0.4234292004650259,
+        "test_f1": 0.459915611814346
+      }
+    ]
+  }
+}
