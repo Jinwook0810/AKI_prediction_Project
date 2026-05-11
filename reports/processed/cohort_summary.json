@@ -12,16 +12,304 @@
     "remove_early_aki": true
   },
   "raw_cleaning": {
-    "urine_cleaning": {
-      "total_urine_rows": 397332,
-      "rows_after_cleaning": 392490,
-      "exact_duplicate_groups": 4754,
-      "exact_duplicate_rows": 9596,
-      "identical_duplicate_groups": 0,
-      "conflicting_duplicate_groups": 4754
+    "overall": {
+      "total_rows": 5078419,
+      "rows_after_cleaning": 5067019,
+      "duplicate_groups": 11311,
+      "duplicate_rows": 22711,
+      "conflicting_duplicate_groups": 11311
+    },
+    "by_label": {
+      "ALP": {
+        "total_rows": 9087,
+        "rows_after_cleaning": 9081,
+        "duplicate_groups": 6,
+        "duplicate_rows": 12,
+        "conflicting_duplicate_groups": 6
+      },
+      "ALT": {
+        "total_rows": 9333,
+        "rows_after_cleaning": 9328,
+        "duplicate_groups": 5,
+        "duplicate_rows": 10,
+        "conflicting_duplicate_groups": 5
+      },
+      "AST": {
+        "total_rows": 9336,
+        "rows_after_cleaning": 9330,
+        "duplicate_groups": 6,
+        "duplicate_rows": 12,
+        "conflicting_duplicate_groups": 6
+      },
+      "Age": {
+        "total_rows": 11514,
+        "rows_after_cleaning": 11514,
+        "duplicate_groups": 0,
+        "duplicate_rows": 0,
+        "conflicting_duplicate_groups": 0
+      },
+      "Albumin": {
+        "total_rows": 6963,
+        "rows_after_cleaning": 6962,
+        "duplicate_groups": 1,
+        "duplicate_rows": 2,
+        "conflicting_duplicate_groups": 1
+      },
+      "BUN": {
+        "total_rows": 40527,
+        "rows_after_cleaning": 40502,
+        "duplicate_groups": 25,
+        "duplicate_rows": 50,
+        "conflicting_duplicate_groups": 25
+      },
+      "Bilirubin": {
+        "total_rows": 9438,
+        "rows_after_cleaning": 9433,
+        "duplicate_groups": 5,
+        "duplicate_rows": 10,
+        "conflicting_duplicate_groups": 5
+      },
+      "Cholesterol": {
+        "total_rows": 952,
+        "rows_after_cleaning": 951,
+        "duplicate_groups": 1,
+        "duplicate_rows": 2,
+        "conflicting_duplicate_groups": 1
+      },
+      "Creatinine": {
+        "total_rows": 40708,
+        "rows_after_cleaning": 40690,
+        "duplicate_groups": 18,
+        "duplicate_rows": 36,
+        "conflicting_duplicate_groups": 18
+      },
+      "DiasABP": {
+        "total_rows": 425259,
+        "rows_after_cleaning": 425259,
+        "duplicate_groups": 0,
+        "duplicate_rows": 0,
+        "conflicting_duplicate_groups": 0
+      },
+      "FiO2": {
+        "total_rows": 91355,
+        "rows_after_cleaning": 91355,
+        "duplicate_groups": 0,
+        "duplicate_rows": 0,
+        "conflicting_duplicate_groups": 0
+      },
+      "GCS": {
+        "total_rows": 178582,
+        "rows_after_cleaning": 178582,
+        "duplicate_groups": 0,
+        "duplicate_rows": 0,
+        "conflicting_duplicate_groups": 0
+      },
+      "Gender": {
+        "total_rows": 11507,
+        "rows_after_cleaning": 11507,
+        "duplicate_groups": 0,
+        "duplicate_rows": 0,
+        "conflicting_duplicate_groups": 0
+      },
+      "Glucose": {
+        "total_rows": 38159,
+        "rows_after_cleaning": 38130,
+        "duplicate_groups": 29,
+        "duplicate_rows": 58,
+        "conflicting_duplicate_groups": 29
+      },
+      "HCO3": {
+        "total_rows": 39666,
+        "rows_after_cleaning": 39639,
+        "duplicate_groups": 27,
+        "duplicate_rows": 54,
+        "conflicting_duplicate_groups": 27
+      },
+      "HCT": {
+        "total_rows": 53443,
+        "rows_after_cleaning": 53397,
+        "duplicate_groups": 45,
+        "duplicate_rows": 91,
+        "conflicting_duplicate_groups": 45
+      },
+      "HR": {
+        "total_rows": 662451,
+        "rows_after_cleaning": 662451,
+        "duplicate_groups": 0,
+        "duplicate_rows": 0,
+        "conflicting_duplicate_groups": 0
+      },
+      "Height": {
+        "total_rows": 6071,
+        "rows_after_cleaning": 6071,
+        "duplicate_groups": 0,
+        "duplicate_rows": 0,
+        "conflicting_duplicate_groups": 0
+      },
+      "ICUType": {
+        "total_rows": 11514,
+        "rows_after_cleaning": 11514,
+        "duplicate_groups": 0,
+        "duplicate_rows": 0,
+        "conflicting_duplicate_groups": 0
+      },
+      "K": {
+        "total_rows": 42454,
+        "rows_after_cleaning": 42424,
+        "duplicate_groups": 30,
+        "duplicate_rows": 60,
+        "conflicting_duplicate_groups": 30
+      },
+      "Lactate": {
+        "total_rows": 23380,
+        "rows_after_cleaning": 23378,
+        "duplicate_groups": 2,
+        "duplicate_rows": 4,
+        "conflicting_duplicate_groups": 2
+      },
+      "MAP": {
+        "total_rows": 426092,
+        "rows_after_cleaning": 420436,
+        "duplicate_groups": 5656,
+        "duplicate_rows": 11312,
+        "conflicting_duplicate_groups": 5656
+      },
+      "MechVent": {
+        "total_rows": 87762,
+        "rows_after_cleaning": 87762,
+        "duplicate_groups": 0,
+        "duplicate_rows": 0,
+        "conflicting_duplicate_groups": 0
+      },
+      "Mg": {
+        "total_rows": 39718,
+        "rows_after_cleaning": 39696,
+        "duplicate_groups": 22,
+        "duplicate_rows": 44,
+        "conflicting_duplicate_groups": 22
+      },
+      "NIDiasABP": {
+        "total_rows": 283148,
+        "rows_after_cleaning": 283148,
+        "duplicate_groups": 0,
+        "duplicate_rows": 0,
+        "conflicting_duplicate_groups": 0
+      },
+      "NIMAP": {
+        "total_rows": 279114,
+        "rows_after_cleaning": 279114,
+        "duplicate_groups": 0,
+        "duplicate_rows": 0,
+        "conflicting_duplicate_groups": 0
+      },
+      "NISysABP": {
+        "total_rows": 283574,
+        "rows_after_cleaning": 283574,
+        "duplicate_groups": 0,
+        "duplicate_rows": 0,
+        "conflicting_duplicate_groups": 0
+      },
+      "Na": {
+        "total_rows": 39691,
+        "rows_after_cleaning": 39662,
+        "duplicate_groups": 29,
+        "duplicate_rows": 58,
+        "conflicting_duplicate_groups": 29
+      },
+      "PaCO2": {
+        "total_rows": 66685,
+        "rows_after_cleaning": 66685,
+        "duplicate_groups": 0,
+        "duplicate_rows": 0,
+        "conflicting_duplicate_groups": 0
+      },
+      "PaO2": {
+        "total_rows": 66520,
+        "rows_after_cleaning": 66520,
+        "duplicate_groups": 0,
+        "duplicate_rows": 0,
+        "conflicting_duplicate_groups": 0
+      },
+      "Platelets": {
+        "total_rows": 41441,
+        "rows_after_cleaning": 41409,
+        "duplicate_groups": 32,
+        "duplicate_rows": 64,
+        "conflicting_duplicate_groups": 32
+      },
+      "RespRate": {
+        "total_rows": 159120,
+        "rows_after_cleaning": 159109,
+        "duplicate_groups": 11,
+        "duplicate_rows": 22,
+        "conflicting_duplicate_groups": 11
+      },
+      "SaO2": {
+        "total_rows": 23345,
+        "rows_after_cleaning": 23345,
+        "duplicate_groups": 0,
+        "duplicate_rows": 0,
+        "conflicting_duplicate_groups": 0
+      },
+      "SysABP": {
+        "total_rows": 425439,
+        "rows_after_cleaning": 425439,
+        "duplicate_groups": 0,
+        "duplicate_rows": 0,
+        "conflicting_duplicate_groups": 0
+      },
+      "Temp": {
+        "total_rows": 251802,
+        "rows_after_cleaning": 251228,
+        "duplicate_groups": 574,
+        "duplicate_rows": 1148,
+        "conflicting_duplicate_groups": 574
+      },
+      "TroponinI": {
+        "total_rows": 1155,
+        "rows_after_cleaning": 1155,
+        "duplicate_groups": 0,
+        "duplicate_rows": 0,
+        "conflicting_duplicate_groups": 0
+      },
+      "TroponinT": {
+        "total_rows": 6029,
+        "rows_after_cleaning": 6026,
+        "duplicate_groups": 3,
+        "duplicate_rows": 6,
+        "conflicting_duplicate_groups": 3
+      },
+      "Urine": {
+        "total_rows": 397332,
+        "rows_after_cleaning": 392490,
+        "duplicate_groups": 4754,
+        "duplicate_rows": 9596,
+        "conflicting_duplicate_groups": 4754
+      },
+      "WBC": {
+        "total_rows": 37791,
+        "rows_after_cleaning": 37763,
+        "duplicate_groups": 28,
+        "duplicate_rows": 56,
+        "conflicting_duplicate_groups": 28
+      },
+      "Weight": {
+        "total_rows": 371168,
+        "rows_after_cleaning": 371166,
+        "duplicate_groups": 2,
+        "duplicate_rows": 4,
+        "conflicting_duplicate_groups": 2
+      },
+      "pH": {
+        "total_rows": 69794,
+        "rows_after_cleaning": 69794,
+        "duplicate_groups": 0,
+        "duplicate_rows": 0,
+        "conflicting_duplicate_groups": 0
+      }
     },
     "value_cleaning": {
-      "total_values_set_to_nan": 4503,
+      "total_values_set_to_nan": 4272,
       "by_variable": {
         "Age": {
           "lower": 0,
@@ -41,42 +329,42 @@
         "HR": {
           "lower": 20,
           "upper": 250,
-          "values_set_to_nan": 30
+          "values_set_to_nan": 21
         },
         "SysABP": {
           "lower": 30,
           "upper": 300,
-          "values_set_to_nan": 1187
+          "values_set_to_nan": 1139
         },
         "DiasABP": {
           "lower": 20,
           "upper": 200,
-          "values_set_to_nan": 1201
+          "values_set_to_nan": 1158
         },
         "MAP": {
           "lower": 20,
           "upper": 250,
-          "values_set_to_nan": 404
+          "values_set_to_nan": 361
         },
         "NISysABP": {
           "lower": 30,
           "upper": 300,
-          "values_set_to_nan": 465
+          "values_set_to_nan": 429
         },
         "NIDiasABP": {
           "lower": 20,
           "upper": 200,
-          "values_set_to_nan": 519
+          "values_set_to_nan": 421
         },
         "NIMAP": {
           "lower": 20,
           "upper": 250,
-          "values_set_to_nan": 74
+          "values_set_to_nan": 59
         },
         "RespRate": {
           "lower": 1,
           "upper": 80,
-          "values_set_to_nan": 124
+          "values_set_to_nan": 114
         },
         "SaO2": {
           "lower": 50,
@@ -86,7 +374,7 @@
         "Temp": {
           "lower": 25,
           "upper": 45,
-          "values_set_to_nan": 165
+          "values_set_to_nan": 236
         },
         "GCS": {
           "lower": 3,
@@ -167,16 +455,16 @@
     }
   },
   "counts": {
-    "filtered_rows": 428170,
-    "filtered_stays": 8963,
-    "removed_early_aki_stays": 2551
+    "filtered_rows": 428122,
+    "filtered_stays": 8962,
+    "removed_early_aki_stays": 2552
   },
   "splits": {
     "train": {
-      "rows": 343684,
-      "stays": 7194,
-      "aki_positive_stays": 1376,
-      "aki_negative_stays": 5818
+      "rows": 343636,
+      "stays": 7193,
+      "aki_positive_stays": 1377,
+      "aki_negative_stays": 5816
     },
     "valid": {
       "rows": 41891,

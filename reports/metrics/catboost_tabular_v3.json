@@ -1,0 +1,27 @@
+{
+  "model": "catboost",
+  "threshold": 0.43000000000000005,
+  "valid_best_f1": 0.5450121654501217,
+  "test": {
+    "n": 891,
+    "positive_rate": 0.17957351290684623,
+    "auroc": 0.7784712722298222,
+    "auprc": 0.4680631586808618,
+    "f1": 0.493573264781491,
+    "precision": 0.4192139737991266,
+    "recall": 0.6,
+    "confusion_matrix": {
+      "tn": 598,
+      "fp": 133,
+      "fn": 64,
+      "tp": 96
+    }
+  },
+  "feature_version": "v3",
+  "features": {
+    "n_features": 313,
+    "train_n": 7193,
+    "valid_n": 878,
+    "test_n": 891
+  }
+}

@@ -66,6 +66,32 @@ Feature count:
 
 - `303`
 
+### Logistic Regression v3
+
+Input file:
+
+- `reports/processed/tabular_features_v3.csv`
+
+Uses all `v2` features plus additional burden and trend features:
+
+- urine burden:
+  - `Urine_low_output_hours_24h`
+  - `Urine_low_output_hours_last12`
+  - `Urine_longest_low_output_streak`
+  - `Urine_any_6h_oliguria`
+- recent creatinine trend:
+  - `Creatinine_slope_last6`
+  - `Creatinine_slope_last12`
+- hemodynamic burden:
+  - `MAP_below_65_hours`
+  - `SysABP_below_90_hours`
+  - `ShockIndex_mean`
+  - `ShockIndex_max`
+
+Feature count:
+
+- `313`
+
 ### Logistic Regression compact
 
 Input file:

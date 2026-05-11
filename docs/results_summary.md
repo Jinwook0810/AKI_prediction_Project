@@ -1,12 +1,12 @@
 # Results Summary
 
-This document summarizes the current cleaned-cohort experiments.
+This document summarizes the current experiments after the preprocessing redesign and `v3` feature engineering update.
 
-## Cohort Used For All Results
+## Cohort Used For Current Tabular Results
 
-All results below use the same cleaned cohort and provided split:
+All current `v3` tabular results use the same cleaned cohort and provided split:
 
-- train: `7194` stays
+- train: `7193` stays
 - valid: `878` stays
 - test: `891` stays
 
@@ -19,124 +19,126 @@ Target:
 
 - `v1`: basic summary statistics
 - `v2`: `v1` plus renal-focused features
-- `compact`: reduced feature subset for a simpler Logistic baseline
+- `v3`: `v2` plus oliguria burden, recent creatinine trend, and hemodynamic burden
+- `compact`: reduced subset for a simpler baseline
 
 Feature counts:
 
 - `v1`: `295`
 - `v2`: `303`
+- `v3`: `313`
 - `compact`: `157`
 
-## Model Comparison
+## Current Tabular Comparison
 
 | Model | Input | Features | AUROC | AUPRC | F1 | Precision | Recall | Notes |
 | --- | --- | ---: | ---: | ---: | ---: | ---: | ---: | --- |
-| Logistic Regression v1 | Tabular | 295 | 0.7350 | 0.3849 | 0.4371 | 0.3262 | 0.6625 | Basic summary baseline |
-| Logistic Regression v2 | Tabular | 303 | 0.7415 | 0.3923 | 0.4668 | 0.3846 | 0.5938 | Interpretable baseline |
+| Logistic Regression v3 | Tabular | 313 | 0.7550 | 0.4118 | 0.4631 | 0.3445 | 0.7063 | Best interpretable baseline after redesign |
+| RandomForest v3 | Tabular | 313 | 0.7917 | 0.4680 | 0.4862 | 0.4059 | 0.6063 | Best AUROC on current tabular cohort |
+| CatBoost v3 | Tabular | 313 | 0.7785 | 0.4681 | 0.4936 | 0.4192 | 0.6000 | Best F1 on current tabular cohort |
+
+## Earlier Reference Results
+
+These older results are still useful as historical baselines, but they were produced before the latest preprocessing redesign.
+
+| Model | Input | Features | AUROC | AUPRC | F1 | Precision | Recall | Notes |
+| --- | --- | ---: | ---: | ---: | ---: | ---: | ---: | --- |
+| Logistic Regression v2 | Tabular | 303 | 0.7415 | 0.3923 | 0.4668 | 0.3846 | 0.5938 | Earlier interpretable baseline |
+| RandomForest v2 | Tabular | 303 | 0.7854 | 0.4477 | 0.4869 | 0.4189 | 0.5813 | Earlier strongest overall tabular baseline |
+| CatBoost v2 | Tabular | 303 | 0.7759 | 0.4440 | 0.4661 | 0.4413 | 0.4938 | Earlier precision-focused model |
 | Logistic Regression compact | Tabular | 157 | 0.7394 | 0.3843 | 0.4338 | 0.3322 | 0.6250 | Simpler feature set |
-| RandomForest v2 | Tabular | 303 | 0.7854 | 0.4477 | 0.4869 | 0.4189 | 0.5813 | Best overall tabular baseline |
-| RandomForest tuned v2 | Tabular | 303 | 0.7844 | 0.4507 | 0.4787 | 0.4167 | 0.5625 | Better AUPRC, lower F1 |
-| CatBoost v2 | Tabular | 303 | 0.7759 | 0.4440 | 0.4661 | 0.4413 | 0.4938 | Strong precision-focused tabular model |
-| CatBoost tuned v2 | Tabular | 303 | 0.7723 | 0.4434 | 0.4689 | 0.4278 | 0.5188 | Slight F1 gain vs untuned CatBoost |
-| LSTM value-only | Sequence | 43 per timestep | 0.7135 | 0.3765 | 0.4174 | 0.3297 | 0.5688 | No mask features |
-| LSTM masked | Sequence | 86 per timestep | 0.7498 | 0.4441 | 0.4337 | 0.3664 | 0.5313 | 43 values + 43 masks |
-| LSTM masked tuned | Sequence | 86 per timestep | 0.7279 | 0.4410 | 0.4481 | 0.3981 | 0.5125 | Higher F1, lower AUROC |
-| Transformer masked | Sequence | 86 per timestep | 0.7488 | 0.3900 | 0.4607 | 0.3964 | 0.5500 | Best untuned sequence F1 |
-| Transformer masked tuned | Sequence | 86 per timestep | 0.7487 | 0.4026 | 0.4513 | 0.3493 | 0.6375 | Higher recall, lower F1 |
+
+## Sequence Reference Results
+
+The sequence baselines below were rerun on the redesigned cohort.
+
+| Model | Input | Features | AUROC | AUPRC | F1 | Precision | Recall | Notes |
+| --- | --- | ---: | ---: | ---: | ---: | ---: | ---: | --- |
+| LSTM value-only | Sequence | 43 per timestep | 0.7376 | 0.4406 | 0.4191 | 0.3641 | 0.4938 | No mask features |
+| LSTM masked | Sequence | 86 per timestep | 0.7608 | 0.4488 | 0.4720 | 0.3769 | 0.6313 | Current best sequence baseline |
+| Transformer masked | Sequence | 86 per timestep | 0.7533 | 0.4180 | 0.4683 | 0.4187 | 0.5313 | Better precision than masked LSTM |
 
 ## Main Takeaways
 
-### 1. Best current model
+### 1. The preprocessing redesign materially changed the tabular benchmark
 
-The strongest current overall baseline is:
+The cohort changed from the earlier version:
 
-- `RandomForest v2`
+- train `7194 -> 7193`
+- early AKI removals `2551 -> 2552`
 
-It gives the best combination of AUROC, AUPRC, and F1 on the cleaned cohort.
+That confirms the preprocessing rules affect not only features, but also label assignment and cohort inclusion.
 
-### 2. Best interpretable baseline
+### 2. `v3` feature engineering improved the strongest tabular baselines
 
-For a simpler and easier-to-explain baseline:
+Compared with `v2`, the new `v3` features improved:
 
-- `Logistic Regression v2`
+- Logistic Regression AUROC and AUPRC
+- RandomForest AUROC and AUPRC
+- CatBoost F1 and AUPRC
 
-This remains useful as the main linear reference model.
+The added signal came from:
 
-### 3. Masking matters for sequence models
+- oliguria burden
+- recent creatinine trend
+- hemodynamic burden
 
-Moving from value-only LSTM to masked LSTM changed:
+### 3. Current best model depends on the metric
 
-- AUROC from `0.7135` to `0.7498`
-- AUPRC from `0.3765` to `0.4441`
+- best AUROC: `RandomForest v3`
+- best AUPRC: `CatBoost v3` by a very small margin
+- best F1: `CatBoost v3`
+- best interpretable baseline: `Logistic Regression v3`
 
-This supports the assumption that observation pattern itself carries signal in ICU data.
+So the current conclusion is not “one model wins everything.”
+It is:
 
-### 4. Sequence models are competitive but not yet better than tabular tree models
+- `RandomForest v3` is the strongest ranking-oriented baseline
+- `CatBoost v3` is the strongest thresholded baseline by F1
 
-The best sequence models are in the same broad range as the tabular linear baseline, but still below the best tabular tree ensemble.
+### 4. Sequence models still matter, but the current best one is masked LSTM
 
-This suggests the next sequence gains are more likely to come from:
+Sequence masking still matters on the redesigned cohort.
 
-- better model selection criteria
-- improved mask/time-gap handling
-- more deliberate tuning
+Compared with value-only LSTM:
 
-not from adding more model names alone.
+- AUROC improved from `0.7376` to `0.7608`
+- AUPRC improved from `0.4406` to `0.4488`
+- F1 improved from `0.4191` to `0.4720`
 
-### 5. Sequence permutation importance is clinically plausible
+The current best sequence baseline is:
 
-For the masked Transformer baseline, permutation importance ranked the following variables highly:
+- `masked LSTM v1`
 
-- `Urine_ml_per_kg_hr`
-- `PaO2`
-- `Temp`
-- `Na`
-- `Creatinine`
+It is still below the best tabular tree models, but it is competitive enough to keep as a meaningful sequence reference.
 
-This is useful because the sequence model is no longer just a black box. The ranking suggests it is using a mix of:
+### 5. `v3` feature importance supports the new engineering choices
 
-- renal-specific signal
-- respiratory / oxygenation signal
-- general physiologic instability
+The new burden features were not just decorative. They moved into top-ranked positions.
 
-Detailed file:
+Examples:
 
-- [transformer_sequence_masked_permutation_importance.md](C:/Users/USER/Desktop/대학교 자료/3-2학기/수업/헬스시스템엔지니어링/reports/importance/transformer_sequence_masked_permutation_importance.md)
+- `Urine_low_output_hours_last12`
+- `Urine_low_output_hours_24h`
+- `Urine_longest_low_output_streak`
+- `Creatinine_slope_last6`
+- `Creatinine_slope_last12`
 
-## Feature Importance Notes
-
-From the current tree models:
-
-- recent urine-per-kg summaries are consistently important
-- creatinine delta and relative creatinine change are consistently important
-- age and some general severity-related signals also appear in top-ranked features
+Tree-model importance confirms that recent oliguria burden and recent renal trend carry real signal.
 
 Detailed files:
 
-- [random_forest_tabular_v2_feature_importance.md](C:/Users/USER/Desktop/대학교 자료/3-2학기/수업/헬스시스템엔지니어링/reports/importance/random_forest_tabular_v2_feature_importance.md)
-- [catboost_tabular_v2_feature_importance.md](C:/Users/USER/Desktop/대학교 자료/3-2학기/수업/헬스시스템엔지니어링/reports/importance/catboost_tabular_v2_feature_importance.md)
+- [random_forest_tabular_v3_feature_importance.md](/C:/Users/USER/Desktop/대학교 자료/3-2학기/수업/헬스시스템엔지니어링/reports/importance/random_forest_tabular_v3_feature_importance.md)
+- [catboost_tabular_v3_feature_importance.md](/C:/Users/USER/Desktop/대학교 자료/3-2학기/수업/헬스시스템엔지니어링/reports/importance/catboost_tabular_v3_feature_importance.md)
+- [transformer_sequence_masked_permutation_importance.md](/C:/Users/USER/Desktop/대학교 자료/3-2학기/수업/헬스시스템엔지니어링/reports/importance/transformer_sequence_masked_permutation_importance.md)
 
-## Recommended Baselines To Report
+## Recommended Results To Report Now
 
-If you want a compact set of headline baselines for GitHub or a report, use:
+For the current repository state, the most defensible headline set is:
 
-1. Logistic Regression v2
-2. RandomForest v2
-3. CatBoost v2
-4. masked Transformer v1
+1. `Logistic Regression v3`
+2. `RandomForest v3`
+3. `CatBoost v3`
+4. `masked LSTM v1` as a sequence reference baseline
 
-This set is broad enough to show:
-
-- linear tabular baseline
-- non-linear tree ensemble
-- stronger boosted tabular model
-- sequence model with missingness information
-
-## Important Caveat
-
-Tuned models here were selected by validation-set F1. That means:
-
-- they are valid experiments
-- but the tuned model with the best validation F1 is not always the model with the best test F1 or best AUROC
-
-That is expected. The selection rule and the final test metric are not identical.
+That set best reflects the current preprocessing and feature-engineering story.

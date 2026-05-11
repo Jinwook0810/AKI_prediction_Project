@@ -6,8 +6,12 @@ from pathlib import Path
 
 import pandas as pd
 
+from .event_cleaning import (
+    aggregate_hourly_by_label,
+    clean_raw_events_by_label,
+    labels_with_ffill,
+)
 from .paths import ProjectPaths
-from .urine_cleaning import clean_urine_raw
 from .value_cleaning import clean_values_by_range
 
 
@@ -39,18 +43,7 @@ def read_split_ids(paths: ProjectPaths) -> dict:
 
 
 def clean_raw_events(df: pd.DataFrame) -> tuple[pd.DataFrame, dict]:
-    df = df.copy()
-
-    urine = df[df["label"] == "Urine"].copy()
-    non_urine = df[df["label"] != "Urine"].copy()
-
-    urine_clean, urine_stats = clean_urine_raw(urine)
-    combined = pd.concat([non_urine, urine_clean], ignore_index=True)
-
-    stats = {
-        "urine_cleaning": urine_stats.to_dict(),
-    }
-    return combined, stats
+    return clean_raw_events_by_label(df)
 
 
 def build_hourly_features(df: pd.DataFrame) -> tuple[pd.DataFrame, pd.DataFrame, dict]:
@@ -59,26 +52,7 @@ def build_hourly_features(df: pd.DataFrame) -> tuple[pd.DataFrame, pd.DataFrame,
     df["charttime_td"] = pd.to_timedelta(df["charttime"] + ":00")
     df = df.sort_values(["stay_id", "label", "charttime_td"])
     df["hour"] = (df["charttime_td"].dt.total_seconds() // 3600).astype(int)
-
-    urine = df[df["label"] == "Urine"].copy()
-    urine_hourly = urine.groupby(
-        ["stay_id", "hour", "label"], as_index=False
-    )["value"].sum()
-
-    creat = df[df["label"] == "Creatinine"].copy()
-    creat_hourly = creat.groupby(
-        ["stay_id", "hour", "label"], as_index=False
-    )["value"].min()
-
-    others = df[~df["label"].isin(["Urine", "Creatinine"])].copy()
-    others_hourly = others.groupby(
-        ["stay_id", "hour", "label"], as_index=False
-    )["value"].last()
-
-    hourly_long = pd.concat(
-        [urine_hourly, creat_hourly, others_hourly],
-        ignore_index=True,
-    )
+    hourly_long = aggregate_hourly_by_label(df)
 
     hourly = hourly_long.pivot_table(
         index=["stay_id", "hour"],
@@ -102,8 +76,7 @@ def build_hourly_features(df: pd.DataFrame) -> tuple[pd.DataFrame, pd.DataFrame,
     hourly_clean, value_cleaning_stats = clean_values_by_range(hourly_full)
     observed_mask = hourly_clean.notna().astype("int8").reset_index()
 
-    cols_no_ffill = ["Urine", "Creatinine"]
-    cols_ffill = [col for col in hourly_clean.columns if col not in cols_no_ffill]
+    cols_ffill = [col for col in labels_with_ffill() if col in hourly_clean.columns]
 
     hourly_ffill = hourly_clean.copy()
     hourly_ffill[cols_ffill] = hourly_clean[cols_ffill].groupby(level="stay_id").ffill()

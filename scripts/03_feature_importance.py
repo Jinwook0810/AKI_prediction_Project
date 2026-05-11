@@ -154,7 +154,7 @@ def main() -> None:
     )
     parser.add_argument(
         "--feature-version",
-        choices=["v2", "compact", "v1"],
+        choices=["v3", "v2", "compact", "v1"],
         default="v2",
     )
     args = parser.parse_args()

@@ -26,10 +26,10 @@ This is clinically meaningful, but it is not a complete KDIGO implementation.
 
 Several preprocessing choices are defensible, but still heuristic:
 
-- exact-timestamp urine conflict resolution
-- hourly aggregation rules
+- exact-timestamp duplicate resolution rules by variable family
+- hourly aggregation rules by variable family
 - broad physiological plausibility ranges
-- not forward-filling `Urine` and `Creatinine`
+- selective forward-fill policy
 
 These rules improved consistency, but another reasonable clinical-data pipeline could make different choices and get different results.
 
@@ -121,14 +121,19 @@ Most useful next upgrades:
 - separate static variables from dynamic sequence variables
 - compare value-only, mask-only, and value-plus-mask variants more systematically
 
-### 2. Add clinically motivated temporal features
+### 2. Add clinically motivated temporal features beyond the current `v3` set
 
-Examples:
+The current `v3` tabular set already adds:
 
 - oliguria burden features
 - recent creatinine slope
-- recent hemodynamic burden such as low-MAP duration
+- recent hemodynamic burden
+
+Useful next additions would include:
+
 - shock-related features
+- time-gap-aware temporal burden
+- intervention-aware temporal context
 
 ### 3. Use broader model selection criteria
 

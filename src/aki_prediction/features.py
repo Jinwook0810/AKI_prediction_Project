@@ -60,6 +60,37 @@ def _safe_divide(numerator: float, denominator: float) -> float:
     return numerator / denominator
 
 
+def _slope(series: pd.Series, hours: pd.Series) -> float:
+    valid = series.notna()
+    values = series[valid]
+    hour_values = hours[valid]
+    if values.shape[0] < 2:
+        return np.nan
+    delta_hours = float(hour_values.iloc[-1] - hour_values.iloc[0])
+    if delta_hours <= 0:
+        return np.nan
+    return float(values.iloc[-1] - values.iloc[0]) / delta_hours
+
+
+def _count_condition(series: pd.Series, condition) -> float:
+    valid = series.dropna()
+    if valid.empty:
+        return np.nan
+    return float(condition(valid).sum())
+
+
+def _longest_true_streak(mask: pd.Series) -> float:
+    longest = 0
+    current = 0
+    for value in mask.fillna(False).astype(bool).tolist():
+        if value:
+            current += 1
+            longest = max(longest, current)
+        else:
+            current = 0
+    return float(longest)
+
+
 def _missing_rate(series: pd.Series, denominator: int = INPUT_WINDOW_HOURS) -> float:
     return 1.0 - float(series.notna().sum()) / float(denominator)
 
@@ -150,6 +181,49 @@ def _summarize_renal_v2(group: pd.DataFrame) -> dict[str, float]:
     }
 
 
+def _summarize_v3_extensions(group: pd.DataFrame) -> dict[str, float]:
+    group = group.sort_values(HOUR_COL).copy()
+    hours = group[HOUR_COL]
+
+    weight = group["Weight"].ffill().bfill()
+    urine_per_kg_hr = group["Urine"] / weight.where(weight > 0)
+    _, urine_rate_upper = EDA_DERIVED_PLAUSIBILITY_RANGES["Urine_ml_per_kg_hr"]
+    urine_per_kg_hr = urine_per_kg_hr.mask(urine_per_kg_hr > urine_rate_upper)
+
+    low_urine = urine_per_kg_hr <= 0.5
+    last12_mask = hours >= INPUT_END_HOUR - 11
+
+    creatinine = group["Creatinine"]
+    creat_last6 = creatinine[hours >= INPUT_END_HOUR - 5]
+    creat_last12 = creatinine[last12_mask]
+    hours_last6 = hours[hours >= INPUT_END_HOUR - 5]
+    hours_last12 = hours[last12_mask]
+
+    map_series = group["MAP"] if "MAP" in group else pd.Series(dtype=float)
+    sysabp = group["SysABP"] if "SysABP" in group else pd.Series(dtype=float)
+    hr = group["HR"] if "HR" in group else pd.Series(dtype=float)
+    shock_index = hr / sysabp.where(sysabp > 0)
+
+    return {
+        "Urine_low_output_hours_24h": _count_condition(
+            urine_per_kg_hr, lambda s: s <= 0.5
+        ),
+        "Urine_low_output_hours_last12": _count_condition(
+            urine_per_kg_hr[last12_mask], lambda s: s <= 0.5
+        ),
+        "Urine_longest_low_output_streak": _longest_true_streak(low_urine),
+        "Urine_any_6h_oliguria": float(
+            low_urine.fillna(False).astype(int).rolling(window=6, min_periods=6).sum().eq(6).any()
+        ),
+        "Creatinine_slope_last6": _slope(creat_last6, hours_last6),
+        "Creatinine_slope_last12": _slope(creat_last12, hours_last12),
+        "MAP_below_65_hours": _count_condition(map_series, lambda s: s < 65),
+        "SysABP_below_90_hours": _count_condition(sysabp, lambda s: s < 90),
+        "ShockIndex_mean": _mean_or_nan(shock_index),
+        "ShockIndex_max": shock_index.dropna().max() if shock_index.notna().any() else np.nan,
+    }
+
+
 def _summarize_dynamic(
     group: pd.DataFrame,
     col: str,
@@ -201,7 +275,7 @@ def build_tabular_features(
     filtered_df: pd.DataFrame,
     feature_version: str = "v1",
 ) -> pd.DataFrame:
-    if feature_version not in {"v1", "v2", "compact"}:
+    if feature_version not in {"v1", "v2", "v3", "compact"}:
         raise ValueError(f"Unsupported feature_version: {feature_version}")
 
     input_df = filtered_df[
@@ -227,13 +301,21 @@ def build_tabular_features(
     ]
     features = pd.DataFrame(rows)
 
-    if feature_version in {"v2", "compact"}:
+    if feature_version in {"v2", "v3", "compact"}:
         renal_rows = [
             {ID_COL: group[ID_COL].iloc[0], **_summarize_renal_v2(group)}
             for _, group in input_df.groupby(ID_COL, sort=False)
         ]
         renal_features = pd.DataFrame(renal_rows)
         features = features.merge(renal_features, on=ID_COL, how="left")
+
+    if feature_version == "v3":
+        v3_rows = [
+            {ID_COL: group[ID_COL].iloc[0], **_summarize_v3_extensions(group)}
+            for _, group in input_df.groupby(ID_COL, sort=False)
+        ]
+        v3_features = pd.DataFrame(v3_rows)
+        features = features.merge(v3_features, on=ID_COL, how="left")
 
     target = _build_target(filtered_df)
     model_table = features.merge(target, on=ID_COL, how="left")

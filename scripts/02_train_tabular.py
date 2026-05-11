@@ -246,7 +246,7 @@ def main() -> None:
     )
     parser.add_argument(
         "--feature-version",
-        choices=["v1", "v2", "compact"],
+        choices=["v1", "v2", "v3", "compact"],
         default="v1",
         help="Patient-level tabular feature set version.",
     )
