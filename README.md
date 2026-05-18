@@ -41,7 +41,7 @@ Expected local files:
 
 ## Current Cohort
 
-Current cohort summary from [cohort_summary.json](/C:/Users/USER/Desktop/대학교 자료/3-2학기/수업/헬스시스템엔지니어링/reports/processed/cohort_summary.json):
+Current cohort summary from [cohort_summary.json](reports/processed/cohort_summary.json):
 
 - filtered stays: `8962`
 - removed early AKI stays: `2552`
@@ -87,7 +87,7 @@ Examples:
 - impossible `pH`
 - extreme `Urine`
 
-Cleaning stats are recorded in [cohort_summary.json](/C:/Users/USER/Desktop/대학교 자료/3-2학기/수업/헬스시스템엔지니어링/reports/processed/cohort_summary.json).
+Cleaning stats are recorded in [cohort_summary.json](reports/processed/cohort_summary.json).
 
 ### 4. Forward fill policy
 
@@ -100,7 +100,7 @@ After value cleaning:
 
 For sequence models, the project also saves:
 
-- [filtered_observed_mask.csv](/C:/Users/USER/Desktop/대학교 자료/3-2학기/수업/헬스시스템엔지니어링/reports/processed/filtered_observed_mask.csv)
+- [filtered_observed_mask.csv](reports/processed/filtered_observed_mask.csv)
 
 This preserves whether each hourly value was originally observed before forward fill.
 
@@ -108,21 +108,21 @@ This preserves whether each hourly value was originally observed before forward 
 
 Core processed outputs:
 
-- [hourly_features.csv](/C:/Users/USER/Desktop/대학교 자료/3-2학기/수업/헬스시스템엔지니어링/reports/processed/hourly_features.csv)
-- [filtered_cohort.csv](/C:/Users/USER/Desktop/대학교 자료/3-2학기/수업/헬스시스템엔지니어링/reports/processed/filtered_cohort.csv)
-- [filtered_observed_mask.csv](/C:/Users/USER/Desktop/대학교 자료/3-2학기/수업/헬스시스템엔지니어링/reports/processed/filtered_observed_mask.csv)
-- [tabular_features_v1.csv](/C:/Users/USER/Desktop/대학교 자료/3-2학기/수업/헬스시스템엔지니어링/reports/processed/tabular_features_v1.csv)
-- [tabular_features_v2.csv](/C:/Users/USER/Desktop/대학교 자료/3-2학기/수업/헬스시스템엔지니어링/reports/processed/tabular_features_v2.csv)
-- [tabular_features_v3.csv](/C:/Users/USER/Desktop/대학교 자료/3-2학기/수업/헬스시스템엔지니어링/reports/processed/tabular_features_v3.csv)
-- [tabular_features_compact.csv](/C:/Users/USER/Desktop/대학교 자료/3-2학기/수업/헬스시스템엔지니어링/reports/processed/tabular_features_compact.csv)
+- [hourly_features.csv](reports/processed/hourly_features.csv)
+- [filtered_cohort.csv](reports/processed/filtered_cohort.csv)
+- [filtered_observed_mask.csv](reports/processed/filtered_observed_mask.csv)
+- [tabular_features_v1.csv](reports/processed/tabular_features_v1.csv)
+- [tabular_features_v2.csv](reports/processed/tabular_features_v2.csv)
+- [tabular_features_v3.csv](reports/processed/tabular_features_v3.csv)
+- [tabular_features_compact.csv](reports/processed/tabular_features_compact.csv)
 
 ## EDA Outputs
 
 Useful files:
 
-- [eda_summary.md](/C:/Users/USER/Desktop/대학교 자료/3-2학기/수업/헬스시스템엔지니어링/reports/eda/eda_summary.md)
-- [missingness_by_variable.csv](/C:/Users/USER/Desktop/대학교 자료/3-2학기/수업/헬스시스템엔지니어링/reports/eda/missingness_by_variable.csv)
-- [data_quality_flags.csv](/C:/Users/USER/Desktop/대학교 자료/3-2학기/수업/헬스시스템엔지니어링/reports/eda/data_quality_flags.csv)
+- [eda_summary.md](reports/eda/eda_summary.md)
+- [missingness_by_variable.csv](reports/eda/missingness_by_variable.csv)
+- [data_quality_flags.csv](reports/eda/data_quality_flags.csv)
 
 Current prominent EDA finding:
 
@@ -151,14 +151,14 @@ for a total of `86` features per timestep.
 
 Detailed input definitions:
 
-- [model_inputs.md](/C:/Users/USER/Desktop/대학교 자료/3-2학기/수업/헬스시스템엔지니어링/docs/model_inputs.md)
-- [limitations_and_future_work.md](/C:/Users/USER/Desktop/대학교 자료/3-2학기/수업/헬스시스템엔지니어링/docs/limitations_and_future_work.md)
+- [model_inputs.md](docs/model_inputs.md)
+- [limitations_and_future_work.md](docs/limitations_and_future_work.md)
 
 ## Current Results
 
 Full comparison:
 
-- [results_summary.md](/C:/Users/USER/Desktop/대학교 자료/3-2학기/수업/헬스시스템엔지니어링/docs/results_summary.md)
+- [results_summary.md](docs/results_summary.md)
 
 Current practical takeaways:
 
@@ -173,39 +173,39 @@ Current practical takeaways:
 
 Pipeline overview:
 
-- [pipeline_overview.md](/C:/Users/USER/Desktop/대학교 자료/3-2학기/수업/헬스시스템엔지니어링/docs/pipeline_overview.md)
+- [pipeline_overview.md](docs/pipeline_overview.md)
 
 Model comparison:
 
-![Model Comparison](/C:/Users/USER/Desktop/대학교 자료/3-2학기/수업/헬스시스템엔지니어링/reports/figures/model_comparison.png)
+![Model Comparison](reports/figures/model_comparison.png)
 
 RandomForest top features:
 
-![RandomForest Top Features](/C:/Users/USER/Desktop/대학교 자료/3-2학기/수업/헬스시스템엔지니어링/reports/figures/random_forest_top_features.png)
+![RandomForest Top Features](reports/figures/random_forest_top_features.png)
 
 CatBoost top features:
 
-![CatBoost Top Features](/C:/Users/USER/Desktop/대학교 자료/3-2학기/수업/헬스시스템엔지니어링/reports/figures/catboost_top_features.png)
+![CatBoost Top Features](reports/figures/catboost_top_features.png)
 
 Tabular precision-recall curves:
 
-![Tabular PR Curves](/C:/Users/USER/Desktop/대학교 자료/3-2학기/수업/헬스시스템엔지니어링/reports/figures/tabular_pr_curves.png)
+![Tabular PR Curves](reports/figures/tabular_pr_curves.png)
 
 Tabular calibration:
 
-![Tabular Calibration](/C:/Users/USER/Desktop/대학교 자료/3-2학기/수업/헬스시스템엔지니어링/reports/figures/tabular_calibration.png)
+![Tabular Calibration](reports/figures/tabular_calibration.png)
 
 Top feature distributions:
 
-![Top Feature Distributions](/C:/Users/USER/Desktop/대학교 자료/3-2학기/수업/헬스시스템엔지니어링/reports/figures/top_feature_distributions.png)
+![Top Feature Distributions](reports/figures/top_feature_distributions.png)
 
 Key variable missingness heatmap:
 
-![Missingness Heatmap](/C:/Users/USER/Desktop/대학교 자료/3-2학기/수업/헬스시스템엔지니어링/reports/figures/key_variable_missingness_heatmap.png)
+![Missingness Heatmap](reports/figures/key_variable_missingness_heatmap.png)
 
 Masked Transformer permutation importance:
 
-![Transformer Sequence Permutation Importance](/C:/Users/USER/Desktop/대학교 자료/3-2학기/수업/헬스시스템엔지니어링/reports/figures/transformer_sequence_permutation_importance.png)
+![Transformer Sequence Permutation Importance](reports/figures/transformer_sequence_permutation_importance.png)
 
 ## How To Run
 

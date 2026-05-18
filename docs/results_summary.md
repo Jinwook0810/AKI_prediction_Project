@@ -128,9 +128,9 @@ Tree-model importance confirms that recent oliguria burden and recent renal tren
 
 Detailed files:
 
-- [random_forest_tabular_v3_feature_importance.md](/C:/Users/USER/Desktop/대학교 자료/3-2학기/수업/헬스시스템엔지니어링/reports/importance/random_forest_tabular_v3_feature_importance.md)
-- [catboost_tabular_v3_feature_importance.md](/C:/Users/USER/Desktop/대학교 자료/3-2학기/수업/헬스시스템엔지니어링/reports/importance/catboost_tabular_v3_feature_importance.md)
-- [transformer_sequence_masked_permutation_importance.md](/C:/Users/USER/Desktop/대학교 자료/3-2학기/수업/헬스시스템엔지니어링/reports/importance/transformer_sequence_masked_permutation_importance.md)
+- [random_forest_tabular_v3_feature_importance.md](../reports/importance/random_forest_tabular_v3_feature_importance.md)
+- [catboost_tabular_v3_feature_importance.md](../reports/importance/catboost_tabular_v3_feature_importance.md)
+- [transformer_sequence_masked_permutation_importance.md](../reports/importance/transformer_sequence_masked_permutation_importance.md)
 
 ## Recommended Results To Report Now
 
