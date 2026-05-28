@@ -2,9 +2,9 @@
 
 This document summarizes the current experiments after the preprocessing redesign and `v3` feature engineering update.
 
-## Cohort Used For Current Tabular Results
+## Cohort Used For Current Results
 
-All current `v3` tabular results use the same cleaned cohort and provided split:
+All current `v3` tabular and sequence results use the same cleaned cohort and provided split:
 
 - train: `7193` stays
 - valid: `878` stays
@@ -35,7 +35,10 @@ Feature counts:
 | --- | --- | ---: | ---: | ---: | ---: | ---: | ---: | --- |
 | Logistic Regression v3 | Tabular | 313 | 0.7550 | 0.4118 | 0.4631 | 0.3445 | 0.7063 | Best interpretable baseline after redesign |
 | RandomForest v3 | Tabular | 313 | 0.7917 | 0.4680 | 0.4862 | 0.4059 | 0.6063 | Best AUROC on current tabular cohort |
-| CatBoost v3 | Tabular | 313 | 0.7785 | 0.4681 | 0.4936 | 0.4192 | 0.6000 | Best F1 on current tabular cohort |
+| CatBoost v3 | Tabular | 313 | 0.7785 | 0.4681 | 0.4936 | 0.4192 | 0.6000 | Best AUPRC by a small margin |
+| LightGBM v3 | Tabular | 313 | 0.7895 | 0.4540 | 0.5223 | 0.4972 | 0.5500 | Best F1 on current tabular cohort |
+| XGBoost v3 | Tabular | 313 | 0.7842 | 0.4549 | 0.4958 | 0.4513 | 0.5500 | Strong additional boosting baseline |
+| TabNet v3 | Tabular | 313 | 0.7237 | 0.3824 | 0.4403 | 0.3312 | 0.6563 | Tabular deep learning reference baseline |
 
 ## Earlier Reference Results
 
@@ -60,7 +63,7 @@ The sequence baselines below were rerun on the redesigned cohort.
 
 ## Main Takeaways
 
-### 1. The preprocessing redesign materially changed the tabular benchmark
+### 1. The preprocessing redesign materially changed the benchmark
 
 The cohort changed from the earlier version:
 
@@ -71,32 +74,36 @@ That confirms the preprocessing rules affect not only features, but also label a
 
 ### 2. `v3` feature engineering improved the strongest tabular baselines
 
-Compared with `v2`, the new `v3` features improved:
-
-- Logistic Regression AUROC and AUPRC
-- RandomForest AUROC and AUPRC
-- CatBoost F1 and AUPRC
-
-The added signal came from:
+Compared with `v2`, the new `v3` features improved the most competitive models and introduced stronger burden-oriented signal:
 
 - oliguria burden
 - recent creatinine trend
 - hemodynamic burden
 
-### 3. Current best model depends on the metric
+Those additions helped:
+
+- Logistic Regression AUROC and AUPRC
+- RandomForest AUROC and AUPRC
+- CatBoost F1 and AUPRC
+- and provided a stronger feature set for LightGBM, XGBoost, and TabNet
+
+### 3. The best tabular model depends on the metric
 
 - best AUROC: `RandomForest v3`
-- best AUPRC: `CatBoost v3` by a very small margin
-- best F1: `CatBoost v3`
+- best AUPRC: `CatBoost v3`
+- best F1: `LightGBM v3`
 - best interpretable baseline: `Logistic Regression v3`
 
-So the current conclusion is not “one model wins everything.”
-It is:
+So the current conclusion is not that one model wins everything.
+
+Instead:
 
 - `RandomForest v3` is the strongest ranking-oriented baseline
-- `CatBoost v3` is the strongest thresholded baseline by F1
+- `LightGBM v3` is the strongest thresholded baseline by F1
+- `CatBoost v3` remains a strong high-AUPRC baseline
+- `TabNet v3` is a useful tabular deep-learning reference, but it does not beat the best boosting models on this cohort
 
-### 4. Sequence models still matter, but the current best one is masked LSTM
+### 4. Sequence models still matter, but masked LSTM is the current best sequence baseline
 
 Sequence masking still matters on the redesigned cohort.
 
@@ -106,11 +113,9 @@ Compared with value-only LSTM:
 - AUPRC improved from `0.4406` to `0.4488`
 - F1 improved from `0.4191` to `0.4720`
 
-The current best sequence baseline is:
+The current best sequence baseline is `masked LSTM v1`.
 
-- `masked LSTM v1`
-
-It is still below the best tabular tree models, but it is competitive enough to keep as a meaningful sequence reference.
+It is still below the best tabular tree models, but it remains a meaningful sequence reference.
 
 ### 5. `v3` feature importance supports the new engineering choices
 
@@ -124,13 +129,49 @@ Examples:
 - `Creatinine_slope_last6`
 - `Creatinine_slope_last12`
 
-Tree-model importance confirms that recent oliguria burden and recent renal trend carry real signal.
-
 Detailed files:
 
 - [random_forest_tabular_v3_feature_importance.md](../reports/importance/random_forest_tabular_v3_feature_importance.md)
 - [catboost_tabular_v3_feature_importance.md](../reports/importance/catboost_tabular_v3_feature_importance.md)
 - [transformer_sequence_masked_permutation_importance.md](../reports/importance/transformer_sequence_masked_permutation_importance.md)
+
+### 6. SHAP supports explainability for the boosting baselines
+
+SHAP explanations were added for the strongest boosting models.
+
+Current SHAP global rankings show the same core pattern across `LightGBM v3` and `CatBoost v3`:
+
+- `Urine_low_output_hours_last12`
+- `Creatinine_delta`
+- `Urine_ml_per_kg_hr_last6_mean` or `Urine_last6_sum`
+- `Age_first`
+
+Artifacts:
+
+- [lightgbm_tabular_v3_shap_global.csv](../reports/importance/lightgbm_tabular_v3_shap_global.csv)
+- [catboost_tabular_v3_shap_global.csv](../reports/importance/catboost_tabular_v3_shap_global.csv)
+- [lightgbm_tabular_v3_shap_local.md](../reports/importance/lightgbm_tabular_v3_shap_local.md)
+- [catboost_tabular_v3_shap_local.md](../reports/importance/catboost_tabular_v3_shap_local.md)
+- [lightgbm_tabular_v3_shap_summary.png](../reports/figures/lightgbm_tabular_v3_shap_summary.png)
+- [catboost_tabular_v3_shap_summary.png](../reports/figures/catboost_tabular_v3_shap_summary.png)
+
+### 7. Decision-oriented analysis makes the risk models easier to operationalize
+
+The tabular baselines were also compared under review-budget and threshold scenarios.
+
+On the current test cohort:
+
+- at a **top 10% review budget**, `RandomForest v3` and `LightGBM v3` each capture `33.1%` of positives with `58.9%` precision
+- at a **top 20% review budget**, `LightGBM v3` captures `55.6%` of positives with `49.7%` precision
+- `CatBoost v3` remains attractive when slightly stronger AUPRC matters
+
+Artifacts:
+
+- [tabular_v3_topk_summary.csv](../reports/decision/tabular_v3_topk_summary.csv)
+- [tabular_v3_threshold_summary.csv](../reports/decision/tabular_v3_threshold_summary.csv)
+- [tabular_v3_decision_summary.md](../reports/decision/tabular_v3_decision_summary.md)
+- [tabular_v3_topk_capture.png](../reports/figures/tabular_v3_topk_capture.png)
+- [tabular_v3_threshold_tradeoff.png](../reports/figures/tabular_v3_threshold_tradeoff.png)
 
 ## Recommended Results To Report Now
 
@@ -138,7 +179,9 @@ For the current repository state, the most defensible headline set is:
 
 1. `Logistic Regression v3`
 2. `RandomForest v3`
-3. `CatBoost v3`
-4. `masked LSTM v1` as a sequence reference baseline
+3. `LightGBM v3`
+4. `CatBoost v3`
+5. `TabNet v3` as a tabular deep-learning reference
+6. `masked LSTM v1` as a sequence reference baseline
 
-That set best reflects the current preprocessing and feature-engineering story.
+That set best reflects the current preprocessing, feature-engineering, explainability, and decision-analysis story.

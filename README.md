@@ -135,6 +135,9 @@ Current prominent EDA finding:
 - Logistic Regression
 - Random Forest
 - CatBoost
+- LightGBM
+- XGBoost
+- TabNet
 
 ### Sequence models
 
@@ -162,9 +165,12 @@ Full comparison:
 
 Current practical takeaways:
 
-- best ranking-oriented tabular baseline: `RandomForest v3`
-- best thresholded tabular baseline by F1: `CatBoost v3`
+- best ranking-oriented tabular baseline by AUROC: `RandomForest v3`
+- best thresholded tabular baseline by F1: `LightGBM v3`
+- strongest tabular deep learning baseline: `TabNet v3`
 - best interpretable baseline: `Logistic Regression v3`
+- SHAP-based XAI is now available for `LightGBM v3` and `CatBoost v3`
+- under a top-10% review budget, `LightGBM v3` and `RandomForest v3` each capture `33.1%` of positives with `58.9%` precision
 - best sequence baseline so far: `masked LSTM v1`
 - mask information materially helps sequence models
 - `v3` feature engineering improved tabular performance by adding oliguria burden and recent trend features
@@ -207,6 +213,40 @@ Masked Transformer permutation importance:
 
 ![Transformer Sequence Permutation Importance](reports/figures/transformer_sequence_permutation_importance.png)
 
+LightGBM SHAP summary:
+
+![LightGBM SHAP Summary](reports/figures/lightgbm_tabular_v3_shap_summary.png)
+
+CatBoost SHAP summary:
+
+![CatBoost SHAP Summary](reports/figures/catboost_tabular_v3_shap_summary.png)
+
+Top-k capture on the test cohort:
+
+![Top-k Capture](reports/figures/tabular_v3_topk_capture.png)
+
+Threshold trade-off:
+
+![Threshold Trade-off](reports/figures/tabular_v3_threshold_tradeoff.png)
+
+## Explainability Artifacts
+
+Global SHAP rankings:
+
+- [lightgbm_tabular_v3_shap_global.csv](reports/importance/lightgbm_tabular_v3_shap_global.csv)
+- [catboost_tabular_v3_shap_global.csv](reports/importance/catboost_tabular_v3_shap_global.csv)
+
+Local SHAP explanations:
+
+- [lightgbm_tabular_v3_shap_local.md](reports/importance/lightgbm_tabular_v3_shap_local.md)
+- [catboost_tabular_v3_shap_local.md](reports/importance/catboost_tabular_v3_shap_local.md)
+
+Decision-analysis artifacts:
+
+- [tabular_v3_topk_summary.csv](reports/decision/tabular_v3_topk_summary.csv)
+- [tabular_v3_threshold_summary.csv](reports/decision/tabular_v3_threshold_summary.csv)
+- [tabular_v3_decision_summary.md](reports/decision/tabular_v3_decision_summary.md)
+
 ## How To Run
 
 Install dependencies:
@@ -241,6 +281,8 @@ Run tabular models:
 py -3 scripts/02_train_tabular.py --model logistic --feature-version v3
 py -3 scripts/02_train_tabular.py --model random_forest --feature-version v3
 py -3 scripts/02_train_tabular.py --model catboost --feature-version v3
+py -3 scripts/02_train_tabular.py --model lightgbm --feature-version v3
+py -3 scripts/02_train_tabular.py --model xgboost --feature-version v3
 ```
 
 Run sequence models:

@@ -1,0 +1,27 @@
+{
+  "model": "xgboost",
+  "threshold": 0.35,
+  "valid_best_f1": 0.5367088607594936,
+  "test": {
+    "n": 891,
+    "positive_rate": 0.17957351290684623,
+    "auroc": 0.7841911764705882,
+    "auprc": 0.4548956636567448,
+    "f1": 0.49577464788732395,
+    "precision": 0.4512820512820513,
+    "recall": 0.55,
+    "confusion_matrix": {
+      "tn": 624,
+      "fp": 107,
+      "fn": 72,
+      "tp": 88
+    }
+  },
+  "feature_version": "v3",
+  "features": {
+    "n_features": 313,
+    "train_n": 7193,
+    "valid_n": 878,
+    "test_n": 891
+  }
+}

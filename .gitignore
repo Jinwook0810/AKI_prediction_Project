@@ -116,6 +116,11 @@ reports/eda/*
 
 reports/importance/*
 !reports/importance/*.md
+!reports/importance/*shap_global.csv
+
+reports/decision/*
+!reports/decision/*.md
+!reports/decision/*.csv
 
 # CatBoost
 catboost_info/
@@ -131,3 +136,8 @@ notebooks/
 
 # Legacy or non-reporting metrics
 reports/metrics/dummy_tabular_v1.json
+
+# Local-only working folders
+.claude/
+.tmp_tabnet_source/
+AKI_prediction_project_clean/

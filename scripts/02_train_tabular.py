@@ -9,6 +9,7 @@ from pathlib import Path
 import numpy as np
 import pandas as pd
 from catboost import CatBoostClassifier
+from lightgbm import LGBMClassifier
 from sklearn.dummy import DummyClassifier
 from sklearn.ensemble import RandomForestClassifier
 from sklearn.impute import SimpleImputer
@@ -23,6 +24,7 @@ from sklearn.metrics import (
 )
 from sklearn.pipeline import Pipeline
 from sklearn.preprocessing import StandardScaler
+from xgboost import XGBClassifier
 
 
 ROOT_DIR = Path(__file__).resolve().parents[1]
@@ -30,6 +32,7 @@ SRC_DIR = ROOT_DIR / "src"
 if str(SRC_DIR) not in sys.path:
     sys.path.insert(0, str(SRC_DIR))
 
+from pytorch_tabnet.tab_model import TabNetClassifier
 from aki_prediction.features import (
     add_split_column,
     build_tabular_features,
@@ -39,6 +42,61 @@ from aki_prediction.paths import build_paths
 
 
 RANDOM_SEED = 42
+
+
+class TabNetWrapper:
+    def __init__(self, params: dict | None = None):
+        params = params or {}
+        self.imputer = SimpleImputer(strategy="median")
+        self.scaler = StandardScaler()
+        self.model = TabNetClassifier(
+            n_d=params.get("n_d", 16),
+            n_a=params.get("n_a", 16),
+            n_steps=params.get("n_steps", 5),
+            gamma=params.get("gamma", 1.5),
+            lambda_sparse=params.get("lambda_sparse", 1e-4),
+            optimizer_params=dict(lr=params.get("lr", 2e-2)),
+            seed=RANDOM_SEED,
+            verbose=0,
+            device_name="auto",
+        )
+        self.max_epochs = params.get("max_epochs", 100)
+        self.patience = params.get("patience", 15)
+        self.batch_size = params.get("batch_size", 1024)
+        self.virtual_batch_size = params.get("virtual_batch_size", 128)
+
+    def fit(self, x: pd.DataFrame, y: pd.Series):
+        x_imp = self.imputer.fit_transform(x)
+        x_scaled = self.scaler.fit_transform(x_imp).astype(np.float32)
+        y_array = y.to_numpy()
+        self.model.fit(
+            x_scaled,
+            y_array,
+            eval_set=[(x_scaled, y_array)],
+            eval_name=["train"],
+            eval_metric=["auc"],
+            weights=1,
+            max_epochs=self.max_epochs,
+            patience=self.patience,
+            batch_size=self.batch_size,
+            virtual_batch_size=self.virtual_batch_size,
+            num_workers=0,
+            drop_last=False,
+        )
+        return self
+
+    def predict_proba(self, x: pd.DataFrame) -> np.ndarray:
+        x_imp = self.imputer.transform(x)
+        x_scaled = self.scaler.transform(x_imp).astype(np.float32)
+        return self.model.predict_proba(x_scaled)
+
+
+def compute_scale_pos_weight(y_train: pd.Series) -> float:
+    positive = float(y_train.sum())
+    negative = float(len(y_train) - positive)
+    if positive <= 0:
+        return 1.0
+    return negative / positive
 
 
 def expand_grid(grid: dict[str, list]) -> list[dict]:
@@ -66,6 +124,36 @@ def get_tuning_grid(model_name: str) -> list[dict]:
             }
         )
 
+    if model_name == "lightgbm":
+        return expand_grid(
+            {
+                "n_estimators": [300, 500],
+                "learning_rate": [0.03, 0.05],
+                "num_leaves": [31, 63],
+                "min_child_samples": [20, 50],
+            }
+        )
+
+    if model_name == "xgboost":
+        return expand_grid(
+            {
+                "n_estimators": [300, 500],
+                "learning_rate": [0.03, 0.05],
+                "max_depth": [4, 6],
+                "min_child_weight": [1, 5],
+            }
+        )
+
+    if model_name == "tabnet":
+        return expand_grid(
+            {
+                "n_d": [8, 16],
+                "n_steps": [4, 5],
+                "gamma": [1.3, 1.5],
+                "lr": [1e-2, 2e-2],
+            }
+        )
+
     raise ValueError(f"Tuning grid is not defined for model: {model_name}")
 
 
@@ -84,8 +172,15 @@ def find_best_threshold(y_true: pd.Series, y_prob: np.ndarray) -> tuple[float, f
     return best_threshold, float(best_f1)
 
 
-def build_model(model_name: str, params: dict | None = None):
+def build_model(
+    model_name: str,
+    params: dict | None = None,
+    y_train: pd.Series | None = None,
+):
     params = params or {}
+    scale_pos_weight = (
+        compute_scale_pos_weight(y_train) if y_train is not None else 1.0
+    )
 
     if model_name == "dummy":
         return DummyClassifier(strategy="most_frequent")
@@ -138,6 +233,50 @@ def build_model(model_name: str, params: dict | None = None):
             random_seed=RANDOM_SEED,
             verbose=False,
         )
+
+    if model_name == "lightgbm":
+        return Pipeline(
+            steps=[
+                ("imputer", SimpleImputer(strategy="median")),
+                (
+                    "model",
+                    LGBMClassifier(
+                        n_estimators=params.get("n_estimators", 500),
+                        learning_rate=params.get("learning_rate", 0.05),
+                        num_leaves=params.get("num_leaves", 31),
+                        min_child_samples=params.get("min_child_samples", 20),
+                        objective="binary",
+                        class_weight="balanced",
+                        random_state=RANDOM_SEED,
+                        verbosity=-1,
+                    ),
+                ),
+            ]
+        )
+
+    if model_name == "xgboost":
+        return Pipeline(
+            steps=[
+                ("imputer", SimpleImputer(strategy="median")),
+                (
+                    "model",
+                    XGBClassifier(
+                        n_estimators=params.get("n_estimators", 500),
+                        learning_rate=params.get("learning_rate", 0.05),
+                        max_depth=params.get("max_depth", 6),
+                        min_child_weight=params.get("min_child_weight", 1),
+                        objective="binary:logistic",
+                        eval_metric="auc",
+                        random_state=RANDOM_SEED,
+                        scale_pos_weight=scale_pos_weight,
+                        n_jobs=1,
+                    ),
+                ),
+            ]
+        )
+
+    if model_name == "tabnet":
+        return TabNetWrapper(params=params)
 
     raise ValueError(f"Unsupported model: {model_name}")
 
@@ -196,7 +335,7 @@ def tune_model(
     trials: list[dict] = []
 
     for params in get_tuning_grid(model_name):
-        model = build_model(model_name, params=params)
+        model = build_model(model_name, params=params, y_train=y_train)
         model.fit(x_train, y_train)
         valid_prob = predict_probability(model, x_valid)
         threshold, valid_best_f1 = find_best_threshold(y_valid, valid_prob)
@@ -236,7 +375,15 @@ def main() -> None:
     parser = argparse.ArgumentParser()
     parser.add_argument(
         "--model",
-        choices=["dummy", "logistic", "random_forest", "catboost"],
+        choices=[
+            "dummy",
+            "logistic",
+            "random_forest",
+            "catboost",
+            "lightgbm",
+            "xgboost",
+            "tabnet",
+        ],
         default="logistic",
     )
     parser.add_argument(
@@ -343,7 +490,7 @@ def main() -> None:
             / f"{args.model}_tuned_tabular_{args.feature_version}.json"
         )
     else:
-        model = build_model(args.model)
+        model = build_model(args.model, y_train=y_train)
         model.fit(x_train, y_train)
 
         valid_prob = predict_probability(model, x_valid)

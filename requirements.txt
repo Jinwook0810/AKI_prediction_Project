@@ -2,5 +2,8 @@ pandas
 scikit-learn
 joblib
 catboost
+lightgbm
+xgboost
+shap
 torch
 matplotlib
